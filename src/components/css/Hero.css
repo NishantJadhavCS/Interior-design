@@ -1,0 +1,224 @@
+/* ------------------------------ */
+/* 🎬 HERO SECTION BASE STRUCTURE */
+/* ------------------------------ */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 8 / 3;
+    overflow: hidden;
+    margin-top: var(--header-height);
+    background: var(--clr-bg, #fafafa);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Each slide */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.02);
+    transition:
+        opacity 1s ease-in-out,
+        transform 2s ease-out;
+    z-index: 0;
+}
+
+/* Active slide fades in */
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    z-index: 2;
+}
+
+/* Centered text */
+.hero-content {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 3;
+    width: 90%;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* When active slide changes, re-trigger fade animation */
+.hero-slide.active .hero-content {
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    letter-spacing: 0.3px;
+}
+
+/* Button with glow + shimmer animation */
+.hero-btn {
+    position: relative;
+    display: inline-block;
+    padding: 14px 36px;
+    background: linear-gradient(90deg,
+            var(--clr-accent, #f5a623),
+            var(--clr-accent-dark, #b87a16));
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    transition: all 0.6s ease;
+    color: #ffffff;
+}
+
+.hero-btn:hover::before {
+    left: 120%;
+    color: #ffffff; 
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    color: var(--clr-text-light);
+    color: #ffffff; 
+}
+
+.hero-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ------------------------------ */
+/* ⬅️➡️ ARROWS — Final Polished  */
+/* ------------------------------ */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 4;
+    transition: color 0.25s ease, transform 0.25s ease;
+    line-height: 1;
+    padding: 0;
+    outline: none;
+}
+
+/* Positioning */
+.hero-arrow.left {
+    left: 40px;
+}
+
+.hero-arrow.right {
+    right: 40px;
+}
+
+/* Hover and focus */
+.hero-arrow:hover,
+.hero-arrow:focus {
+    /* color: var(--clr-accent, #f5a623); */
+    transform: translateY(-50%) scale(1.2);
+    outline: none;
+    box-shadow: none;
+}
+
+.hero-arrow:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .hero-arrow {
+        font-size: 2.2rem;
+    }
+
+    .hero-arrow.left {
+        left: 20px;
+    }
+
+    .hero-arrow.right {
+        right: 20px;
+    }
+}
+
+/* ------------------------------ */
+/* 📱 RESPONSIVE                 */
+/* ------------------------------ */
+@media (max-width: 1024px) {
+    .hero-section {
+        aspect-ratio: 16 / 9;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        aspect-ratio: auto;
+        height: 80vh;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-btn {
+        padding: 10px 24px;
+        font-size: 15px;
+    }
+}

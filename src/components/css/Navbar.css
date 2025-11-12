@@ -1,0 +1,466 @@
+:root {
+    --header-height: 90px;
+    /* same as your .header-inner height */
+    --navbar-inner-max-w: 1600px;
+    /* limit content width inside */
+}
+
+/* Fixed header that spans full screen */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 9999;
+    backdrop-filter: blur(12px);
+    background: var(--clr-surface, #fff);
+    border-bottom: 1px solid var(--clr-border, #e5e7eb);
+    box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
+}
+
+/* Inner header stays centered and constrained */
+.header-inner {
+    max-width: var(--navbar-inner-max-w);
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    /* logo | links | contact */
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    box-sizing: border-box;
+}
+
+/* Left side */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Contact button */
+.btn-contact {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--clr-primary, #1a374d);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: var(--shadow-soft, 0 6px 18px rgba(17, 24, 39, 0.06));
+}
+
+/* Center: brand */
+.header-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-logo {
+    height: 42px;
+    width: auto;
+    display: block;
+}
+
+/* show or hide brand text as needed */
+.brand-text {
+    font-weight: 700;
+    color: var(--clr-primary, #1a374d);
+    font-size: 15px;
+    display: none;
+}
+
+/* Right: nav links */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--clr-text-light, #6b7280);
+    font-weight: 600;
+    padding: 8px;
+    transition: color 160ms ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--clr-primary, #1a374d);
+    outline: none;
+}
+
+/* Phone button styling */
+.btn-phone {
+    border: 1px solid var(--clr-border, #e5e7eb);
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--clr-primary, #1a374d);
+    text-decoration: none;
+    background: transparent;
+}
+
+/* Mobile adjustments */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--clr-text-light, #6b7280);
+}
+
+/* Screen size adjustments */
+@media (max-width: 860px) {
+    .header-inner {
+        height: 64px;
+        grid-template-columns: auto 1fr auto;
+        max-width: 100%;
+        /* allow it to use full width padding on small screens */
+        padding: 0 16px;
+    }
+
+    .brand-text {
+        display: inline-block;
+    }
+
+    .nav-links {
+        position: absolute;
+        right: 16px;
+        top: 64px;
+        flex-direction: column;
+        background: var(--clr-surface, #fff);
+        border: 1px solid var(--clr-border, #eee);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: var(--shadow-medium, 0 12px 30px rgba(17, 24, 39, 0.08));
+        display: none;
+        min-width: 180px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+    }
+
+    .header-left {
+        order: 1;
+    }
+
+    .header-center {
+        order: 2;
+        transform: none;
+        /* remove translate on small screens */
+    }
+
+    .header-right {
+        order: 3;
+    }
+}
+
+/* Screen-reader only span */
+.sr-only {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+/* Optional: small visual tweaks for hover */
+.nav-links a:hover {
+    color: var(--clr-primary, #1a374d);
+}
+
+/* ========================= */
+/* Micro-interactions & FX   */
+/* ========================= */
+
+/* Controls speed of micro-interactions */
+:root {
+    --motion-fast: 180ms;
+    --motion-medium: 260ms;
+    --motion-spring: cubic-bezier(.2, .8, .25, 1);
+}
+
+/* --- Logo hover --- */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform var(--motion-medium) var(--motion-spring), filter var(--motion-medium) var(--motion-spring);
+    will-change: transform, filter;
+}
+
+.brand-logo {
+    transition: transform var(--motion-medium) var(--motion-spring), filter var(--motion-medium) var(--motion-spring);
+    transform-origin: center;
+    will-change: transform, filter;
+}
+
+/* subtle lift + glow on hover/focus */
+.brand:hover,
+.brand:focus {
+    transform: translateY(-3px);
+}
+
+.brand:hover .brand-logo,
+.brand:focus .brand-logo {
+    transform: scale(1.04);
+    filter: drop-shadow(0 10px 30px rgba(26, 55, 77, 0.12));
+}
+
+/* --- Nav link hover with underline animation --- */
+.nav-links a {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    transition: color var(--motion-fast) var(--motion-spring), transform var(--motion-fast) var(--motion-spring);
+}
+
+/* underline pseudo-element */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    /* distance from link text */
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform var(--motion-medium) var(--motion-spring), opacity var(--motion-fast);
+    opacity: 0.0;
+    border-radius: 3px;
+}
+
+/* hover/focus state */
+.nav-links a:hover,
+.nav-links a:focus {
+    color: var(--clr-primary);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* small active state (click) */
+.nav-links a:active {
+    transform: translateY(-1px) scale(0.995);
+}
+
+.btn-contact {
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    border: 2px solid var(--clr-accent-dark);
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--clr-accent-dark);
+    background-color: #ffffff;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.25s ease-in, border-color 0.25s ease-in,
+        transform 0.25s cubic-bezier(0.2, 0.8, 0.25, 1),
+        box-shadow 0.25s ease;
+}
+
+/* before & after create animated color waves */
+.btn-contact::before,
+.btn-contact::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    width: 140%;
+    height: 180%;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.6s 0.05s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+/* initial states */
+.btn-contact::before {
+    top: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-contact::after {
+    top: 180%;
+    background-color: var(--clr-accent);
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+}
+
+/* hover animation */
+.btn-contact:hover,
+.btn-contact:focus {
+    color: #ffffff;
+    border-color: var(--clr-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(26, 55, 77, 0.1);
+    outline: none;
+}
+
+.btn-contact:hover::before {
+    top: -35%;
+    background-color: var(--clr--light);
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.btn-contact:hover::after {
+    top: -45%;
+    background-color: var(--clr-accent);
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* pressed state */
+.btn-contact:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 10px rgba(26, 55, 77, 0.08);
+}
+
+/* accessible focus ring */
+.btn-contact:focus-visible {
+    box-shadow: 0 0 0 3px rgba(26, 55, 77, 0.25);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .btn-contact,
+    .btn-contact::before,
+    .btn-contact::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* --- Mobile menu toggle styling (small improvements) --- */
+.menu-toggle {
+    transition: transform var(--motion-fast) var(--motion-spring), color var(--motion-fast);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+    transform: scale(1.06);
+    color: var(--clr-primary);
+}
+
+/* --- Small helpers for contrast & spacing --- */
+.nav-links li {
+    line-height: 1;
+}
+
+.nav-links a {
+    padding: 8px 6px;
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --motion-fast: 1ms;
+        --motion-medium: 1ms;
+    }
+
+    .brand,
+    .brand-logo,
+    .nav-links a,
+    .nav-links a::after,
+    .btn-contact,
+    .menu-toggle {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .brand:hover,
+    .nav-links a:hover,
+    .btn-contact:hover {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+}
+
+/* ============================= */
+/* Navbar hover floating effect  */
+/* ============================= */
+
+.site-header {
+    transition:
+        transform 280ms cubic-bezier(0.2, 0.8, 0.25, 1),
+        box-shadow 280ms cubic-bezier(0.2, 0.8, 0.25, 1),
+        background-color 200ms ease;
+    will-change: transform, box-shadow;
+}
+
+/* When user hovers anywhere on the navbar */
+.site-header:hover {
+    transform: translateY(-3px);
+    /* gentle lift */
+    box-shadow: 0 10px 25px rgba(26, 55, 77, 0.08),
+        0 6px 10px rgba(26, 55, 77, 0.04);
+    background-color: var(--clr-surface, #fff);
+}
+
+/* Add a slightly deeper shadow when active (on click or focus-within) */
+.site-header:active,
+.site-header:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(26, 55, 77, 0.06);
+}
+
+/* Maintain smoothness on mobile (no twitchy motion) */
+@media (max-width: 860px) {
+    .site-header:hover {
+        transform: none;
+        box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
+    }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .site-header {
+        transition: none;
+        transform: none !important;
+        box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
+    }
+}
