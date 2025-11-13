@@ -51,19 +51,18 @@ export default function Hero() {
 
     const containerWidth = () => (sectionRef.current ? sectionRef.current.clientWidth : window.innerWidth);
 
-    // --- Helper to detect interactive targets. If user pressed an interactive element,
-    //     we DON'T start a drag (so arrow clicks, links, inputs, etc. remain functional).
+    // --- only treat as interactive if the actual target element is an interactive tag
     const isInteractiveTarget = (target) => {
-        if (!target) return false;
-        const interactive = target.closest && (target.closest("button, a, input, textarea, select, label"));
-        return !!interactive;
+        if (!target || !target.tagName) return false;
+        const tag = target.tagName.toLowerCase();
+        return ["button", "a", "input", "textarea", "select", "label"].includes(tag);
     };
 
     const onPointerDown = (e) => {
-        // Ignore right-click
+        // ignore right-click
         if (e.pointerType === "mouse" && e.button !== 0) return;
 
-        // If user pressed a button/link/form control — don't start a drag.
+        // if the direct element pressed is interactive, don't start a drag (so arrows, links work)
         if (isInteractiveTarget(e.target)) return;
 
         pointerIdRef.current = e.pointerId;
@@ -74,14 +73,10 @@ export default function Hero() {
         setIsPaused(true);
         setDragOffset(0);
 
-        // capture on the section itself (if available)
-        if (sectionRef.current && sectionRef.current.setPointerCapture) {
-            try {
-                sectionRef.current.setPointerCapture(e.pointerId);
-            } catch (err) {
-                // ignore
-            }
-        }
+        // capture on the section to keep receiving moves/up
+        try {
+            sectionRef.current && sectionRef.current.setPointerCapture && sectionRef.current.setPointerCapture(e.pointerId);
+        } catch (err) { }
 
         sectionRef.current && sectionRef.current.classList.add("is-dragging");
     };
@@ -119,15 +114,12 @@ export default function Hero() {
         setDragOffset(0);
         sectionRef.current && sectionRef.current.classList.remove("is-dragging");
         setTimeout(() => setIsPaused(false), 80);
-        if (sectionRef.current && sectionRef.current.releasePointerCapture) {
-            try {
-                sectionRef.current.releasePointerCapture(e?.pointerId);
-            } catch (err) { }
-        }
+        try {
+            sectionRef.current && sectionRef.current.releasePointerCapture && sectionRef.current.releasePointerCapture(e?.pointerId);
+        } catch (err) { }
     };
 
     const onPointerUp = (e) => {
-        // ignore if not the capturing pointer
         if (pointerIdRef.current !== null && e.pointerId !== pointerIdRef.current) return;
 
         const dx = e.clientX - pointerStartX.current;
@@ -144,7 +136,7 @@ export default function Hero() {
     const onPointerCancel = (e) => finishPointer(e);
     const onLostPointerCapture = (e) => finishPointer(e);
 
-    // Render slides positioned horizontally using translateX + dragOffset (js sets style)
+    // Render slides positioned horizontally using translateX + dragOffset
     const renderSlides = () => {
         const width = containerWidth() || 1;
         const dragPercent = (dragOffset / width) * 100;
@@ -197,7 +189,6 @@ export default function Hero() {
         >
             {renderSlides()}
 
-            {/* arrows — note: click/press on these are interactive so onPointerDown ignores them */}
             <button className="hero-arrow left" onClick={prevSlide} aria-label="Previous slide" type="button">
                 &#10094;
             </button>
@@ -205,7 +196,6 @@ export default function Hero() {
                 &#10095;
             </button>
 
-            {/* dots */}
             <div className="hero-dots" role="tablist" aria-label="Slide indicators">
                 {slides.map((_, idx) => (
                     <button

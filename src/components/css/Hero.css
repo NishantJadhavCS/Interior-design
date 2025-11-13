@@ -7,6 +7,7 @@
     margin-top: var(--header-height);
     background: var(--clr-bg, #fafafa);
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    touch-action: pan-y;
 }
 
 /* Each slide — positioned full-bleed, use translateX for horizontal placement */
