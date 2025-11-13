@@ -408,3 +408,66 @@
         top: 60%;
     }
 }
+
+/* Make entire card look & behave clickable */
+.card {
+    cursor: pointer;
+}
+
+/* Trigger button hover styles when hovering the card itself or when card is in-view */
+.card:hover .button,
+.card.in-view .button {
+    transform: translateY(-3px);
+    filter: brightness(0.88);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+    background-color: var(--clr-primary-dark);
+    /* keeps style consistent with .card.in-view rule */
+    color: #fff;
+}
+
+/* Icon wrapper inversion when hovering card */
+.card:hover .button__icon-wrapper,
+.card.in-view .button__icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* Also move icon layers when hovering card */
+.card:hover .button__icon-svg:first-child,
+.card.in-view .button__icon-svg:first-child {
+    transform: translate(150%, -150%);
+}
+
+.card:hover .button__icon-svg--copy,
+.card.in-view .button__icon-svg--copy {
+    transform: translate(-50%, -50%);
+    transition-delay: 0.06s;
+}
+
+/* Ensure focus styles for keyboard users when the card is focused */
+.card:focus {
+    outline: none;
+    box-shadow: 0 6px 24px rgba(12, 18, 28, 0.12);
+}
+
+.card:focus .button {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+}
+
+/* Make sure internal interactive elements keep their own cursor */
+.card a,
+.card button,
+.card input,
+.card select,
+.card textarea {
+    cursor: pointer;
+}
+
+/* Larger hit area for mobile taps (optional) */
+@media (max-width: 980px) {
+    .card {
+        padding-bottom: 0.5rem;
+        /* small breathing room for tap */
+    }
+}
