@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-    const whatsappNumber = "+911234567890"; // replace with real number
+    const whatsappNumber = "+911234567890"; 
     const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=Hi%20Contrive%20Designs`;
 
     return (
@@ -14,7 +14,6 @@ export default function Navbar() {
                 <div className="header-left">
                     <a href="/" className="brand" aria-label="Contrive Designs home">
                         <img src={logo} alt="Contrive Designs" className="brand-logo" />
-                        <span className="brand-text">Contrive Designs</span>
                     </a>
                 </div>
 

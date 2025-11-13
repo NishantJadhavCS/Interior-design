@@ -1,3 +1,4 @@
+/* ---------- HERO (updated for drag/swipe) ---------- */
 .hero-section {
     position: relative;
     width: 100%;
@@ -8,26 +9,36 @@
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Each slide */
+/* Each slide — positioned full-bleed, use translateX for horizontal placement */
 .hero-slide {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    /* start hidden via opacity; transform includes translateX (set from JS) plus subtle scale */
     opacity: 0;
-    transform: scale(1.02);
+    transform: translateX(0) scale(1.02);
     transition:
-        opacity 1s ease-in-out,
-        transform 2s ease-out;
+        opacity 550ms ease-in-out,
+        transform 600ms cubic-bezier(.22, .9, .32, 1);
+    will-change: transform, opacity;
     z-index: 0;
 }
 
-/* Active slide fades in */
+/* Active slide visible */
 .hero-slide.active {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(0) scale(1);
     z-index: 1;
+}
+
+/* While user is actively dragging, disable CSS transitions so slides follow pointer (JS toggles .is-dragging) */
+.hero-section.is-dragging .hero-slide {
+    transition: none !important;
 }
 
 /* Overlay */
@@ -118,14 +129,14 @@
 
 .hero-btn:hover::before {
     left: 120%;
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 .hero-btn:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
     color: var(--clr-text-light);
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 .hero-btn:active {
@@ -164,7 +175,6 @@
 /* Hover and focus */
 .hero-arrow:hover,
 .hero-arrow:focus {
-    /* color: var(--clr-accent, #f5a623); */
     transform: translateY(-50%) scale(1.2);
     outline: none;
     box-shadow: none;
@@ -175,24 +185,68 @@
     box-shadow: none !important;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-    .hero-arrow {
-        font-size: 2.2rem;
-    }
+/* Dots (slide indicators) */
+.hero-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 22px;
+    display: flex;
+    gap: 10px;
+    z-index: 6;
+    align-items: center;
+    pointer-events: auto;
+}
 
-    .hero-arrow.left {
-        left: 20px;
-    }
+.hero-dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease, width 180ms ease, height 180ms ease, box-shadow 180ms ease;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    .hero-arrow.right {
-        right: 20px;
-    }
+.hero-dot.active,
+.hero-dot[aria-selected="true"] {
+    width: 14px;
+    height: 14px;
+    background: var(--clr-accent, #f5a623);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+.hero-dot:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+    transform: scale(1.05);
+}
+
+.hero-dot::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 999px;
+    pointer-events: none;
+}
+
+/* Drag feedback class toggled by JS */
+.hero-section.is-dragging {
+    cursor: grabbing;
+    touch-action: pan-y;
+    /* allow vertical scroll but keep horizontal drag responsive */
 }
 
 /* ------------------------------ */
 /* 📱 RESPONSIVE                 */
 /* ------------------------------ */
+
+/* Responsive tweaks */
 @media (max-width: 1024px) {
     .hero-section {
         aspect-ratio: 16 / 9;
@@ -203,18 +257,220 @@
     }
 }
 
+/* Mobile / touch: faster animations & hide arrows */
 @media (max-width: 768px) {
+    .hero-slide {
+        transition:
+            opacity 480ms ease-in-out,
+            transform 480ms cubic-bezier(.22, .9, .32, 1);
+    }
+
+    .hero-content {
+        animation: fadeUpMobile 520ms ease forwards;
+        animation-delay: 120ms;
+    }
+
+    @keyframes fadeUpMobile {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -43%);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .hero-arrow {
+        display: none;
+    }
+
+    .hero-dots {
+        bottom: 16px;
+        gap: 8px;
+    }
+
+    .hero-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .hero-dot.active {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* pointer: coarse covers many touch devices even when viewport width check misses some */
+@media (pointer: coarse) {
+    .hero-arrow {
+        display: none;
+    }
+
+    .hero-slide {
+        transition:
+            opacity 480ms ease-in-out,
+            transform 480ms cubic-bezier(.22, .9, .32, 1);
+    }
+
+    .hero-content {
+        animation: fadeUpMobile 520ms ease forwards;
+        animation-delay: 120ms;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-slide,
+    .hero-content,
+    .hero-btn,
+    .hero-arrow,
+    .hero-dot {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ---------- Additional responsive tuning ---------- */
+
+/* Large tablet / small laptop */
+@media (max-width: 1200px) {
     .hero-section {
-        aspect-ratio: auto;
-        height: 80vh;
+        aspect-ratio: 16 / 9;
     }
 
     .hero-title {
-        font-size: 1.5rem;
+        font-size: clamp(1.9rem, 4vw, 2.6rem);
     }
 
     .hero-btn {
-        padding: 10px 24px;
+        padding: 12px 28px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .hero-arrow {
+        left: 28px;
+        right: 28px;
+        font-size: 2.6rem;
+    }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .hero-section {
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
+    .hero-title {
+        font-size: clamp(1.7rem, 4.2vw, 2.2rem);
+    }
+
+    .hero-btn {
+        padding: 11px 26px;
         font-size: 15px;
     }
+
+    .hero-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .hero-dot.active {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Mobile phones — compact layout, arrows hidden, larger hit targets */
+@media (max-width: 768px) {
+    .hero-section {
+        aspect-ratio: auto;
+        height: 70vh;
+        /* shorter than 80vh to avoid very tall hero on some phones */
+        min-height: 420px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.2rem, 6vw, 1.6rem);
+        line-height: 1.25;
+        padding: 0 18px;
+    }
+
+    .hero-content {
+        top: 55%;
+    }
+
+    .hero-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 10px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    /* hide arrow controls for touch users */
+    .hero-arrow {
+        display: none !important;
+    }
+
+    /* dots slightly larger and more spaced for finger navigation */
+    .hero-dots {
+        bottom: 14px;
+        gap: 12px;
+    }
+
+    .hero-dot {
+        width: 12px;
+        height: 12px;
+    }
+
+    .hero-dot.active {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* increase tappable area for dots without changing visual size */
+    .hero-dot::after {
+        inset: -8px;
+    }
+}
+
+/* Very small phones — make sure text doesn't overflow */
+@media (max-width: 400px) {
+    .hero-section {
+        height: 64vh;
+        min-height: 360px;
+    }
+
+    .hero-title {
+        font-size: 1.15rem;
+    }
+
+    .hero-btn {
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+}
+
+/* Improve hit targets for desktop too (mouse users) */
+.hero-arrow,
+.hero-dot {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Accessibility: focus outlines for keyboard users */
+.hero-arrow:focus-visible,
+.hero-dot:focus-visible,
+.hero-btn:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+}
+
+/* Slight performance improvement for image-heavy slides */
+.hero-slide {
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
 }
