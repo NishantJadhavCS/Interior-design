@@ -1,0 +1,255 @@
+.estimator-overlay {
+    position: fixed;
+    inset: 0;
+    /* Use a modern, slightly darker/bluer backdrop for depth */
+    background: rgba(40, 50, 60, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    /* Increased blur for better separation */
+    z-index: 9999;
+    /* Ensure it stays on top */
+}
+
+.estimator-box {
+    width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--clr-surface);
+    border-radius: var(--radius-lg, 12px);
+    /* Fallback for radius */
+    padding: 30px;
+    /* Increased padding for more breathing room */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Enhanced, softer shadow */
+    position: relative;
+    animation: popup .4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Smoother animation curve */
+}
+
+/* 📱 Mobile Optimization */
+@media (max-width: 480px) {
+    .estimator-box {
+        width: 95vw;
+        /* Slightly wider on mobile */
+        padding: 20px;
+        border-radius: var(--radius-md, 8px);
+        max-height: 95vh;
+    }
+
+    .estimator-overlay {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.title {
+    color: var(--clr-primary, #336699);
+    font-size: 1.8rem;
+    /* Slightly larger title */
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--clr-primary-xlight, #F0F4F8);
+    /* Subtle separator */
+    padding-bottom: 10px;
+}
+
+.item-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Slightly tighter gap */
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 10px;
+    /* More space for scrollbar */
+}
+
+/* Individual Item Row */
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--clr-primary-xlight, #F0F4F8);
+    padding: 15px 18px;
+    /* Balanced padding */
+    border-radius: var(--radius-md, 8px);
+    /* Added subtle inner shadow/border for depth */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    /* Smooth transition for interaction */
+}
+
+/* Subtle hover effect for item rows */
+.item-row:hover {
+    background: darken(var(--clr-primary-xlight, #F0F4F8), 5%);
+    /* Pseudo-darkening */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Left side (name + price) */
+.item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-weight: 600;
+    color: var(--clr-text-dark, #333333);
+    font-size: 1.1rem;
+}
+
+.item-price {
+    font-size: 0.95rem;
+    color: var(--clr-text-light, #AAAAAA);
+    margin-top: 4px;
+}
+
+/* Add Button */
+.add-btn {
+    background: var(--clr-accent, #28A745);
+    border: none;
+    padding: 8px 18px;
+    border-radius: var(--radius-sm, 6px);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.add-btn:hover {
+    background: var(--clr-accent);
+}
+
+.add-btn:active {
+    transform: scale(0.98);
+}
+
+.qty-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* +/- Buttons */
+.qty-btn {
+    background: var(--clr-primary-light, #6699CC);
+    border: none;
+    width: 36px;
+    /* Slightly larger */
+    height: 36px;
+    border-radius: var(--radius-sm, 6px);
+    color: white;
+    cursor: pointer;
+    font-size: 1.4rem;
+    /* Larger icon/symbol */
+    line-height: 1;
+    /* Ensure vertical alignment is perfect */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.qty-btn:hover {
+    background: var(--clr-primary, #336699);
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+/* Quantity number */
+.qty-number {
+    width: 30px;
+    /* Wider for two-digit numbers */
+    text-align: center;
+    font-size: 1.1rem;
+    /* Slightly larger number */
+    font-weight: 700;
+    color: var(--clr-text-dark, #333333);
+}
+
+
+.total-section {
+    margin-top: 30px;
+    /* More margin */
+    padding: 18px;
+    background: var(--clr-primary, #336699);
+    color: white;
+    border-radius: var(--radius-md, 8px);
+    /* Added a distinct separation shadow */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    outline: none !important;
+    right: 15px;
+    background: none;
+    color: var(--clr-text-light, #AAAAAA);
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    color: var(--clr-primary, #336699);
+    transform: rotate(90deg);
+    outline: none !important;
+}
+
+/* 🎨 Scrollbar Styling (Modernized) */
+.item-section::-webkit-scrollbar {
+    width: 10px;
+    /* Slightly wider scrollbar */
+}
+
+.item-section::-webkit-scrollbar-track {
+    background: var(--clr-primary-xlight, #F0F4F8);
+    /* Track matches item background */
+    border-radius: 10px;
+}
+
+.item-section::-webkit-scrollbar-thumb {
+    background-color: var(--clr-primary-light, #6699CC);
+    border-radius: 10px;
+    border: 3px solid var(--clr-primary-xlight, #F0F4F8);
+    /* Padding around thumb */
+}
+
+.item-section::-webkit-scrollbar-thumb:hover {
+    background-color: var(--clr-primary, #336699);
+}
+
+/* Firefox support */
+.item-section {
+    scrollbar-width: thin;
+    scrollbar-color: var(--clr-primary-light, #6699CC) var(--clr-primary-xlight, #F0F4F8);
+}

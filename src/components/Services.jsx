@@ -1,15 +1,13 @@
-import React from "react";
 import "./css/Services.css";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-// Replace these imports with your real assets
 import img1 from "../assets/1bhk.jpg";
 import img2 from "../assets/2bhk.jpg";
 import img3 from "../assets/budget.jpg";
+import FloatingEstimator from "./FloatingEstimator";
 
 export default function Services() {
-    const whatsappBase = (msg) =>
-        `https://wa.me/${"+918928755993".replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
+    const [estimatorOpen, setEstimatorOpen] = useState(false);
     useEffect(() => {
         // only activate behavior on small screens where cards are stacked
         const mobileBreakpoint = 980;
@@ -19,28 +17,22 @@ export default function Services() {
 
         function tick() {
             ticking = false;
-            // pick all visible cards
             const cards = Array.from(document.querySelectorAll(".cards .card"));
             if (!cards.length) return;
 
             const vhCenter = window.innerHeight / 2;
 
-            // compute distance from each card's center to viewport center
             const distances = cards.map((el) => {
                 const rect = el.getBoundingClientRect();
                 const elCenter = rect.top + rect.height / 2;
                 return { el, distance: Math.abs(elCenter - vhCenter), rectTop: rect.top, rectHeight: rect.height };
             });
 
-            // choose the closest card to center
             distances.sort((a, b) => a.distance - b.distance);
             const closest = distances[0];
 
-            // threshold: only activate if the card center is within some px of center
-            // tweak threshold as needed (I recommend ~window.innerHeight * 0.28)
             const threshold = Math.max(120, window.innerHeight * 0.28);
 
-            // remove class from all, then add to the chosen one if within threshold
             cards.forEach((c) => c.classList.remove("in-view"));
 
             if (closest && closest.distance <= threshold) {
@@ -155,7 +147,7 @@ export default function Services() {
                             <div className="card-actions">
                                 <a
                                     className="button"
-                                    href={`https://wa.me/918928755993?text=${encodeURIComponent("Hi, I'd like an estimate for my home budget")}`}
+                                    onClick={() => setEstimatorOpen(true)}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -174,6 +166,8 @@ export default function Services() {
                     </article>
                 </div>
             </div>
+            {/* Render the FloatingEstimator when open */}
+            {estimatorOpen && <FloatingEstimator onClose={() => setEstimatorOpen(false)} />}
         </section>
     );
 }
