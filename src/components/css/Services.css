@@ -146,7 +146,7 @@
 @media (max-width: 980px) {
     .cards {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 3rem;
     }
 
     .card-media {
@@ -373,7 +373,7 @@
     }
 
     .card.in-view {
-        transform: translateY(-14px) scale(1.03);
+        transform: translateY(-10px) scale(1.01);
         box-shadow:
             0 28px 70px rgba(12, 18, 29, 0.20),
             0 12px 24px rgba(12, 18, 29, 0.12),
