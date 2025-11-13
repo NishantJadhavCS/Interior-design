@@ -1,0 +1,101 @@
+Hero Section - with an 2 images one for book consultation and other for calculate cost. - (ref Livespace)
+Packages overview section with 3 cards.
+Build in your own budget section probably again with an image bg if possible or maybe we use illustrations or something but wont look good.
+Highlights Section - Why Choose Us with those 4 highlights.
+Portfolio with completed projects.
+Testimonials 
+Contact Us with email template.
+Footer with Copyright notice logo and contact details, social media handles.
+One thign missing is the About Us section. not sure if its required or not. But if there is anything such as statistical data or something might use that.
+
+🌐 Website Plan: Contrive Designs
+🎯 Core Message
+
+“Affordable Interior Design Solutions for 1 & 2 BHK Homes — Delivered in Just 40 Days.”
+
+Contrive Designs specializes in quick, preset interior design packages for small homes, with flexible options for custom and budget builds.
+
+🧭 Website Structure
+1️⃣ Home Page
+
+Goal: Impress fast, highlight affordability + 40-day delivery, and drive enquiries.
+
+🖼 Hero Section
+
+Tagline:
+
+“Affordable 1 & 2 BHK Interiors — Ready in Just 40 Days.”
+
+Subtext:
+
+“Choose from preset designs or customize your dream space.”
+
+Buttons:
+
+“View Packages”
+
+“WhatsApp Enquiry”
+
+“Call Now”
+
+⚡ Highlights Section (3 icons)
+
+🕒 40-Day Delivery Guarantee
+
+💰 Budget-Friendly Packages
+
+🎨 Professionally Curated Designs
+
+🏡 Packages Overview
+
+A clean section with 3 cards:
+
+1 BHK Package
+
+Preset design themes (Modern, Minimal, Cozy, etc.)
+
+Fixed pricing
+
+“View Sample Design” button
+
+2 BHK Package
+
+Preset designs curated by Contrive
+
+Quick project execution (40 days)
+
+“Explore Package” button
+
+Build in Your Budget
+
+For clients who want flexible scope and pricing
+
+“Request Estimate” button
+
+(Optional Add-on) Custom Design for 2BHK+ Homes
+
+Premium design consultation
+
+Custom layout and finishes
+
+“Book Consultation” button
+
+📸 Featured Projects
+
+Showcase 3–4 completed 1BHK and 2BHK homes.
+
+Each with before–after or 3D render → photo carousel.
+
+CTA: “See More Projects.”
+
+💬 Testimonials
+
+2–3 short client quotes with names & city (real or placeholders for now).
+
+📞 Contact Section
+
+Contact form → email
+
+Floating WhatsApp + Call button
+
+“Book a Free Consultation” CTA
