@@ -5,14 +5,14 @@
   padding: 0;
 }
 
-/* 🎨 Theme Variables */
 :root {
   /* ---------- Brand Palette ---------- */
   --clr-primary-dark: #0f2230;
   --clr-primary: #1a374d;
   --clr-primary-light: #2c6e91;
   --clr-primary-xlight: #e8f1f5;
-
+  --clr-surface-50: #ebebeb;
+  
   /* ---------- Accent Palette ---------- */
   --clr-accent-dark: #b87a16;
   --clr-accent: #f5a623;

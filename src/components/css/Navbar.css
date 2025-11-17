@@ -1,26 +1,37 @@
+/* ========================= */
+/* ROOT VARIABLES            */
+/* ========================= */
 :root {
     --header-height: 90px;
-    /* same as your .header-inner height */
     --navbar-inner-max-w: 1600px;
-    /* limit content width inside */
+
+    --clr-primary: #1a374d;
+    --clr-accent: #406882;
+    --clr-accent-dark: #1a374d;
+    --clr-text-light: #6b7280;
+    --clr-border: #e5e7eb;
+    --clr-surface: #ffffff;
+
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.04);
+    --motion-fast: 180ms;
+    --motion-medium: 260ms;
+    --motion-spring: cubic-bezier(.2, .8, .25, 1);
 }
 
-/* Fixed header that spans full screen */
 .site-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
     height: var(--header-height);
-    z-index: 9999;
+    width: 100%;
+    background: var(--clr-surface);
     backdrop-filter: blur(12px);
-    background: var(--clr-surface, #fff);
-    border-bottom: 1px solid var(--clr-border, #e5e7eb);
-    box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
+    border-bottom: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-soft);
+    z-index: 9999;
 }
 
-/* Inner header stays centered and constrained */
 .header-inner {
     max-width: var(--navbar-inner-max-w);
     margin: 0 auto;
@@ -28,259 +39,87 @@
     height: 100%;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    /* logo | links | contact */
     align-items: center;
-    justify-content: space-between;
     gap: 50px;
-    box-sizing: border-box;
-}
-
-/* Left side */
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Contact button */
-.btn-contact {
-    display: inline-block;
-    padding: 10px 14px;
-    border-radius: 8px;
-    background: var(--clr-primary, #1a374d);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    box-shadow: var(--shadow-soft, 0 6px 18px rgba(17, 24, 39, 0.06));
-}
-
-/* Center: brand */
-.header-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    text-decoration: none;
-    color: inherit;
 }
 
 .brand-logo {
     height: 42px;
     width: auto;
-    display: block;
 }
 
-/* show or hide brand text as needed */
-.brand-text {
-    font-weight: 700;
-    color: var(--clr-primary, #1a374d);
-    font-size: 15px;
-    display: none;
-}
-
-/* Right: nav links */
-.header-right {
+.desktop-only {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
 }
+
+/* ========================= */
+/* NAV LINKS (DESKTOP)       */
+/* ========================= */
 
 .nav-links {
-    display: flex;
+    display: inline-flex;
     gap: 18px;
     list-style: none;
-    margin: 0;
-    padding: 0;
-    align-items: center;
+    padding: 8px 10px 10px;
+    transition:
+        color 0.25s ease,
+        transform 0.25s var(--motion-spring);
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: var(--clr-text-light, #6b7280);
-    font-weight: 600;
-    padding: 8px;
-    transition: color 160ms ease;
-}
-
-.nav-links a:hover,
-.nav-links a:focus {
-    color: var(--clr-primary, #1a374d);
-    outline: none;
-}
-
-/* Phone button styling */
-.btn-phone {
-    border: 1px solid var(--clr-border, #e5e7eb);
-    padding: 8px 10px;
-    border-radius: 8px;
-    color: var(--clr-primary, #1a374d);
-    text-decoration: none;
-    background: transparent;
-}
-
-/* Mobile adjustments */
-.menu-toggle {
-    display: none;
-    background: transparent;
-    border: 0;
-    padding: 8px;
-    cursor: pointer;
-    color: var(--clr-text-light, #6b7280);
-}
-
-/* Screen size adjustments */
-@media (max-width: 860px) {
-    .header-inner {
-        height: 64px;
-        grid-template-columns: auto 1fr auto;
-        max-width: 100%;
-        /* allow it to use full width padding on small screens */
-        padding: 0 16px;
-    }
-
-    .brand-text {
-        display: inline-block;
-    }
-
-    .nav-links {
-        position: absolute;
-        right: 16px;
-        top: 64px;
-        flex-direction: column;
-        background: var(--clr-surface, #fff);
-        border: 1px solid var(--clr-border, #eee);
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: var(--shadow-medium, 0 12px 30px rgba(17, 24, 39, 0.08));
-        display: none;
-        min-width: 180px;
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: inline-flex;
-    }
-
-    .header-left {
-        order: 1;
-    }
-
-    .header-center {
-        order: 2;
-        transform: none;
-        /* remove translate on small screens */
-    }
-
-    .header-right {
-        order: 3;
-    }
-}
-
-/* Screen-reader only span */
-.sr-only {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
-}
-
-/* Optional: small visual tweaks for hover */
-.nav-links a:hover {
-    color: var(--clr-primary, #1a374d);
-}
-
-/* ========================= */
-/* Micro-interactions & FX   */
-/* ========================= */
-
-/* Controls speed of micro-interactions */
-:root {
-    --motion-fast: 180ms;
-    --motion-medium: 260ms;
-    --motion-spring: cubic-bezier(.2, .8, .25, 1);
-}
-
-/* --- Logo hover --- */
-.brand {
     display: inline-flex;
+    /* allow vertical movement */
     align-items: center;
-    gap: 10px;
-    transition: transform var(--motion-medium) var(--motion-spring), filter var(--motion-medium) var(--motion-spring);
-    will-change: transform, filter;
-}
-
-.brand-logo {
-    transition: transform var(--motion-medium) var(--motion-spring), filter var(--motion-medium) var(--motion-spring);
-    transform-origin: center;
-    will-change: transform, filter;
-}
-
-/* subtle lift + glow on hover/focus */
-.brand:hover,
-.brand:focus {
-    transform: translateY(-3px);
-}
-
-.brand:hover .brand-logo,
-.brand:focus .brand-logo {
-    transform: scale(1.04);
-    filter: drop-shadow(0 10px 30px rgba(26, 55, 77, 0.12));
-}
-
-/* --- Nav link hover with underline animation --- */
-.nav-links a {
+    padding: 8px 10px 7px;
+    /* bottom padding creates space to float */
     position: relative;
-    display: inline-block;
-    overflow: visible;
-    transition: color var(--motion-fast) var(--motion-spring), transform var(--motion-fast) var(--motion-spring);
+    text-decoration: none;
+    color: var(--clr-text-light);
+    font-weight: 600;
+    transition:
+        color 0.25s ease,
+        transform 0.25s var(--motion-spring);
 }
 
-/* underline pseudo-element */
+/* ========================= */
+/* UNDERLINE ANIMATION       */
+/* ========================= */
+
 .nav-links a::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: -6px;
-    /* distance from link text */
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform var(--motion-medium) var(--motion-spring), opacity var(--motion-fast);
-    opacity: 0.0;
     border-radius: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
-/* hover/focus state */
 .nav-links a:hover,
 .nav-links a:focus {
     color: var(--clr-primary);
-    transform: translateY(-3px);
-    outline: none;
+    transform: translateY(-2px) scale(0.98);
 }
 
 .nav-links a:hover::after,
 .nav-links a:focus::after {
     transform: scaleX(1);
-    opacity: 1;
 }
 
-/* small active state (click) */
-.nav-links a:active {
-    transform: translateY(-1px) scale(0.995);
-}
+/* ========================= */
+/* Desktop Contact Button    */
+/* ========================= */
 
 .btn-contact {
     position: relative;
@@ -360,107 +199,152 @@
     box-shadow: 0 0 0 3px rgba(26, 55, 77, 0.25);
 }
 
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
+/* ========================= */
+/* MOBILE ONLY BEHAVIOR      */
+/* ========================= */
 
-    .btn-contact,
-    .btn-contact::before,
-    .btn-contact::after {
-        transition: none !important;
-        animation: none !important;
+.menu-toggle-mobile {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    color: var(--clr-text-light);
+}
+
+/* MOBILE — Hide desktop */
+@media (max-width: 860px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    /* Show hamburger */
+    .menu-toggle-mobile {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .header-inner {
+        grid-template-columns: auto 1fr auto;
+        height: 64px;
+        padding: 0 16px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    /* Center logo on mobile */
+    .brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
-/* --- Mobile menu toggle styling (small improvements) --- */
-.menu-toggle {
-    transition: transform var(--motion-fast) var(--motion-spring), color var(--motion-fast);
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
 }
 
-.menu-toggle:hover,
-.menu-toggle:focus {
-    transform: scale(1.06);
-    color: var(--clr-primary);
+.nav-overlay.show {
+    opacity: 1;
+    pointer-events: all;
 }
 
-/* --- Small helpers for contrast & spacing --- */
-.nav-links li {
-    line-height: 1;
+/* Drawer */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+/* Close button */
+.drawer-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: #444;
+    align-self: flex-end;
+}
+
+/* Drawer links */
+.drawer-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.drawer-links a {
+    text-decoration: none;
+    color: #111;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* Drawer Contact Button */
+.drawer-contact-btn {
+    margin-top: auto;
+    display: block;
+    background: var(--clr-accent);
+    color: white;
+    padding: 14px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================= */
+/* FLOAT ANIMATION — LOGO    */
+/* ========================= */
+
+.brand {
+    transition: transform 0.3s var(--motion-spring), filter 0.3s ease;
+}
+
+.brand:hover,
+.brand:focus {
+    transform: translateY(-4px) scale(1.03);
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.12));
+}
+
+
+/* ========================= */
+/* FLOAT ANIMATION — NAV LINKS */
+/* ========================= */
 
 .nav-links a {
-    padding: 8px 6px;
-}
-
-/* ---------- Respect reduced motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-    :root {
-        --motion-fast: 1ms;
-        --motion-medium: 1ms;
-    }
-
-    .brand,
-    .brand-logo,
-    .nav-links a,
-    .nav-links a::after,
-    .btn-contact,
-    .menu-toggle {
-        transition: none !important;
-        animation: none !important;
-    }
-
-    .brand:hover,
-    .nav-links a:hover,
-    .btn-contact:hover {
-        transform: none !important;
-        filter: none !important;
-    }
-
-    .nav-links a::after {
-        display: none;
-    }
-}
-
-/* ============================= */
-/* Navbar hover floating effect  */
-/* ============================= */
-
-.site-header {
     transition:
-        transform 280ms cubic-bezier(0.2, 0.8, 0.25, 1),
-        box-shadow 280ms cubic-bezier(0.2, 0.8, 0.25, 1),
-        background-color 200ms ease;
-    will-change: transform, box-shadow;
+        color 0.25s ease,
+        transform 0.25s var(--motion-spring);
 }
 
-/* When user hovers anywhere on the navbar */
-.site-header:hover {
-    transform: translateY(-3px);
-    /* gentle lift */
-    box-shadow: 0 10px 25px rgba(26, 55, 77, 0.08),
-        0 6px 10px rgba(26, 55, 77, 0.04);
-    background-color: var(--clr-surface, #fff);
-}
-
-/* Add a slightly deeper shadow when active (on click or focus-within) */
-.site-header:active,
-.site-header:focus-within {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(26, 55, 77, 0.06);
-}
-
-/* Maintain smoothness on mobile (no twitchy motion) */
-@media (max-width: 860px) {
-    .site-header:hover {
-        transform: none;
-        box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
-    }
-}
-
-/* Respect reduced-motion preference */
-@media (prefers-reduced-motion: reduce) {
-    .site-header {
-        transition: none;
-        transform: none !important;
-        box-shadow: var(--shadow-soft, 0 4px 12px rgba(0, 0, 0, 0.04));
-    }
+.nav-links a:hover,
+.nav-links a:focus {
+    transform: translateY(-4px) scale(1.05);
+    color: var(--clr-primary);
 }

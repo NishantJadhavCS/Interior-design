@@ -1,0 +1,290 @@
+.highlights {
+    background: var(--clr-surface-50);
+    padding: 28px 12px;
+    overflow: hidden;
+}
+
+.highlights-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.highlights-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.hi-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--clr-text-dark);
+}
+
+.hi-subtitle {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--clr-text-light);
+}
+
+
+.scroll-track {
+    display: flex;
+    gap: 60px;
+    align-items: stretch;
+    will-change: transform;
+    animation: scroll-left 2s linear infinite;
+}
+
+/* Pause scroll on hover/focus */
+.highlights:hover .scroll-track,
+.highlights:focus-within .scroll-track {
+    animation-play-state: paused;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-track {
+        animation: none !important;
+    }
+}
+
+/* Highlight card */
+.highlight-card {
+    flex: 0 0 auto;
+    width: 300px;
+    min-height: 130px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 18px;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.highlight-card:hover,
+.highlight-card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Icon wrapper */
+.icon-wrap {
+    flex: 0 0 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, var(--clr-primary-xlight), rgba(26, 55, 77, 0.04));
+}
+
+/* GIF sizing */
+.hi-gif {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Text styling */
+.card-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--clr-text-dark);
+}
+
+.card-desc {
+    margin: 6px 0 0 0;
+    font-size: 15px;
+    color: var(--clr-text-light);
+    line-height: 1.25;
+}
+
+/* Keyframes for infinite scroll (translate -50% for duplicated loop) */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* -------------------------
+   Responsive breakpoints
+   (gaps and durations tuned per breakpoint)
+   ------------------------- */
+
+/* Large desktop — widen cards slightly, moderate gap, slightly slower animation */
+@media (min-width: 1200px) {
+    .highlight-card {
+        width: 340px;
+        min-height: 140px;
+        padding: 24px;
+    }
+
+    .icon-wrap {
+        width: 64px;
+        height: 64px;
+    }
+
+    .hi-gif {
+        width: 88px;
+        height: 88px;
+    }
+
+    .scroll-track {
+        gap: 100px;
+        /* reduced from previous large gap */
+        animation-duration: 10s;
+        /* smooth and slightly slower than smallest desktop */
+    }
+}
+
+/* Desktop / laptop */
+@media (min-width: 900px) and (max-width: 1199px) {
+    .highlight-card {
+        width: 320px;
+        min-height: 135px;
+        padding: 22px;
+    }
+
+    .icon-wrap {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hi-gif {
+        width: 84px;
+        height: 84px;
+    }
+
+    .scroll-track {
+        gap: 80px;
+        /* reduced gap for tighter frequency */
+        animation-duration: 7s;
+        /* faster than previous */
+    }
+}
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 899px) {
+    .highlight-card {
+        width: 300px;
+        min-height: 130px;
+        padding: 20px;
+    }
+
+    .icon-wrap {
+        width: 56px;
+        height: 56px;
+    }
+
+    .hi-gif {
+        width: 72px;
+        height: 72px;
+    }
+
+    .scroll-track {
+        gap: 48px;
+        /* smaller gap for more frequency */
+        animation-duration: 5.5s;
+        /* faster to keep rhythm */
+    }
+}
+
+/* -------------------------
+   Mobile (touch-first)
+   Disable auto animation & enable swipe + snap
+   ------------------------- */
+@media (max-width: 599px) {
+
+    /* Disable auto animation on mobile for usability */
+    .scroll-track {
+        animation: none;
+        gap: 12px;
+        /* tighter than before so cards feel more frequent */
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+        /* space for scrollbar */
+    }
+
+    /* Each card becomes a snap point */
+    .highlight-card {
+        flex: 0 0 auto;
+        width: calc(78% - 12px);
+        /* card occupies most of viewport */
+        min-height: 120px;
+        padding: 18px;
+        scroll-snap-align: start;
+    }
+
+    /* Slightly smaller icon / gif for mobile */
+    .icon-wrap {
+        flex: 0 0 48px;
+        height: 48px;
+    }
+
+    .hi-gif {
+        width: 48px;
+        height: 48px;
+    }
+
+    /* Keep hover pause rule harmless */
+    .highlights:hover .scroll-track,
+    .highlights:focus-within .scroll-track {
+        animation-play-state: paused;
+    }
+
+    /* Subtle scrollbar (WebKit) */
+    .scroll-track::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .scroll-track::-webkit-scrollbar-thumb {
+        background: rgba(26, 55, 77, 0.12);
+        border-radius: 999px;
+    }
+}
+
+/* Extra small phones — tighten sizes */
+@media (max-width: 420px) {
+    .highlight-card {
+        width: calc(86% - 16px);
+        min-height: 110px;
+        padding: 14px;
+    }
+
+    .icon-wrap {
+        width: 44px;
+        height: 44px;
+    }
+
+    .hi-gif {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-desc {
+        font-size: 14px;
+    }
+}
