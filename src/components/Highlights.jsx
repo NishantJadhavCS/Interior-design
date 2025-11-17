@@ -24,7 +24,7 @@ export default function Highlights() {
         {
             id: "curated",
             icon: PalleteGif,
-            title: "Professionally Curated Designs",
+            title: "Professional Designs",
             desc: "Designs made by experienced interior stylists.",
         },
         {

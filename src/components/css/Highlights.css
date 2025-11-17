@@ -1,6 +1,6 @@
 .highlights {
     background: var(--clr-surface-50);
-    padding: 28px 12px;
+    padding: 28px 10px;
     overflow: hidden;
 }
 
@@ -28,7 +28,6 @@
     color: var(--clr-text-light);
 }
 
-
 .scroll-track {
     display: flex;
     gap: 60px;
@@ -37,68 +36,81 @@
     animation: scroll-left 2s linear infinite;
 }
 
-/* Pause scroll on hover/focus */
 .highlights:hover .scroll-track,
 .highlights:focus-within .scroll-track {
     animation-play-state: paused;
 }
 
-/* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     .scroll-track {
         animation: none !important;
     }
 }
 
-/* Highlight card */
 .highlight-card {
+    display: flex;
+    /* row layout: icon | text */
+    flex-direction: row;
+    align-items: center;
+    /* vertical center of icon + text */
+    gap: 14px;
     flex: 0 0 auto;
     width: 300px;
     min-height: 130px;
+    /* ensures uniform card height */
     background: var(--clr-surface);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-soft);
-    display: flex;
-    gap: 14px;
-    align-items: center;
     padding: 18px;
+    box-sizing: border-box;
     transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
+
+/* Slight lift on hover */
 .highlight-card:hover,
 .highlight-card:focus-within {
     transform: translateY(-6px);
     box-shadow: var(--shadow-medium);
 }
 
-/* Icon wrapper */
+/* Icon wrapper: fixed square, center the GIF exactly */
 .icon-wrap {
-    flex: 0 0 56px;
-    height: 56px;
+    flex: 0 0 72px;
+    /* fixed size so icons line up */
+    width: 72px;
+    height: 72px;
     display: grid;
     place-items: center;
+    /* center gif perfectly */
     border-radius: var(--radius-md);
-    background: linear-gradient(180deg, var(--clr-primary-xlight), rgba(26, 55, 77, 0.04));
+    background: linear-gradient(180deg, var(--clr-primary-xlight, rgba(26, 55, 77, 0.06)), rgba(26, 55, 77, 0.04));
+    box-sizing: border-box;
 }
 
-/* GIF sizing */
+/* GIF sizing: keep contained and consistent */
 .hi-gif {
-    width: 80px;
-    height: 80px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
     display: block;
 }
 
-/* Text styling */
+/* Text area: vertical center + avoid collapse when multi-line */
 .card-text {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    /* vertically center text lines */
+    min-height: 56px;
+    /* ensures text block lines up with icon */
 }
 
+/* Make sure titles & descriptions align visually */
 .card-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
     line-height: 1.15;
     color: var(--clr-text-dark);
@@ -111,7 +123,6 @@
     line-height: 1.25;
 }
 
-/* Keyframes for infinite scroll (translate -50% for duplicated loop) */
 @keyframes scroll-left {
     0% {
         transform: translateX(0);
@@ -121,11 +132,6 @@
         transform: translateX(-50%);
     }
 }
-
-/* -------------------------
-   Responsive breakpoints
-   (gaps and durations tuned per breakpoint)
-   ------------------------- */
 
 /* Large desktop — widen cards slightly, moderate gap, slightly slower animation */
 @media (min-width: 1200px) {
@@ -141,15 +147,13 @@
     }
 
     .hi-gif {
-        width: 88px;
-        height: 88px;
+        width: 80px;
+        height: 80px;
     }
 
     .scroll-track {
         gap: 100px;
-        /* reduced from previous large gap */
         animation-duration: 10s;
-        /* smooth and slightly slower than smallest desktop */
     }
 }
 
@@ -205,13 +209,8 @@
     }
 }
 
-/* -------------------------
-   Mobile (touch-first)
-   Disable auto animation & enable swipe + snap
-   ------------------------- */
 @media (max-width: 599px) {
 
-    /* Disable auto animation on mobile for usability */
     .scroll-track {
         animation: none;
         gap: 12px;
