@@ -139,7 +139,6 @@
         box-shadow 0.25s ease;
 }
 
-/* before & after create animated color waves */
 .btn-contact::before,
 .btn-contact::after {
     content: "";
@@ -154,7 +153,6 @@
     z-index: -1;
 }
 
-/* initial states */
 .btn-contact::before {
     top: 100%;
     background-color: rgba(0, 0, 0, 0.05);

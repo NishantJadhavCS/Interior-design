@@ -1,0 +1,272 @@
+/* =======================================
+   Testimonials Header 
+======================================= */
+.testimonials-header {
+    padding-top: 2.5rem;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--clr-primary);
+    margin-bottom: -30px;
+    /* Pulls the grid section up closer to the header */
+}
+
+.testimonials-header p {
+    color: var(--clr-primary);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+@media (max-width: 650px) {
+    .testimonials-header {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .testimonials-header p {
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+}
+
+
+/* =======================================
+   Testimonials Section 🌟 (Grid Setup)
+======================================= */
+.testimonials-section {
+    display: grid;
+    /* Desktop: 3 columns, each 25% of the container width */
+    grid-template-columns: repeat(3, 23%);
+    justify-content: center;
+    /* Centers the whole grid */
+    gap: 24px;
+    padding: 60px 20px;
+
+    /* Section Background Gradient */
+    background: #fafafa
+}
+
+/* Tablet Layout (max-width: 900px) */
+@media (max-width: 900px) {
+    .testimonials-section {
+        /* Tablet/Small Desktop: 2 equal-width columns */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 40px 15px;
+        /* Disable center justification when using 1fr to fill space */
+        justify-content: unset;
+    }
+}
+
+/* =======================================
+   Mobile Carousel (max-width: 650px) 📱
+   Switches from vertical grid to horizontal scroll
+======================================= */
+@media (max-width: 650px) {
+    .testimonials-section {
+        display: flex;
+        /* Switch back to flex for horizontal layout */
+        grid-template-columns: unset;
+        /* Remove grid columns */
+        overflow-x: scroll;
+        /* Enable horizontal scrolling */
+        overflow-y: hidden;
+        /* Prevent vertical scrolling inside */
+        scroll-snap-type: x mandatory;
+        /* Force snapping horizontally */
+
+        /* Adjust padding for carousel view */
+        padding: 40px 0;
+        gap: 16px;
+
+        /* Optional: Hide Scrollbar for cleaner look */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Hide Scrollbar for Chrome/Safari */
+    .testimonials-section::-webkit-scrollbar {
+        display: none;
+    }
+
+    .testimonial-card {
+        width: 85vw;
+        /* Card takes up 85% of the viewport width */
+        flex-shrink: 0;
+        /* Important: Prevents cards from shrinking */
+        scroll-snap-align: center;
+        /* Snap the card to the center of the viewport */
+    }
+
+    /* Give the first and last card some space from the edge */
+    .testimonial-card:first-child {
+        margin-left: 20px;
+    }
+
+    .testimonial-card:last-child {
+        margin-right: 20px;
+    }
+}
+
+/* =======================================
+   Fade-In Animation Keyframes
+======================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =======================================
+   Testimonial Card 💎 (Refined Style & Animation)
+======================================= */
+.testimonial-card {
+    padding: 30px;
+    border-radius: 20px;
+    border: none;
+
+    /* Refined Card Background Gradient */
+    background: linear-gradient(145deg, #ffffff 0%, #f4f8ff 100%);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 280px;
+    /* Smoother transition curve for all properties */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    /* Apply Fade-In Animation */
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Animation Delay for Staggered Effect */
+.testimonial-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.testimonial-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.testimonial-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Add more :nth-child rules if you have more than 3 cards initially visible */
+
+
+/* Enhanced Hover Effect */
+.testimonial-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #ffffff 0%, #ebf2ff 100%);
+}
+
+/* =======================================
+   Quote Icon 💬
+======================================= */
+.quote-icon {
+    font-size: 44px;
+    color: #4c8aff;
+    margin-bottom: 12px;
+    text-align: center;
+    /* Subtle pulsating effect */
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        color: #4c8aff;
+    }
+
+    to {
+        color: #81b4ff;
+    }
+}
+
+
+/* =======================================
+   Quote Text
+======================================= */
+.quote {
+    color: #374151;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+    text-align: center;
+    padding: 0 5px;
+}
+
+/* =======================================
+   Stars ⭐
+======================================= */
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.star {
+    font-size: 24px;
+    color: #d1d5db;
+    cursor: default;
+    transition: transform 0.2s ease, color 0.4s ease;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+/* =======================================
+   Profile Info 👤
+======================================= */
+.profile {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.name {
+    font-weight: 800;
+    font-size: 16px;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.city {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* =======================================
+   Responsive Tweaks (Card sizes in carousel view)
+======================================= */
+@media (max-width: 600px) {
+    .testimonial-card {
+        padding: 25px;
+        min-height: auto;
+    }
+
+    .quote {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .star {
+        font-size: 22px;
+    }
+}
