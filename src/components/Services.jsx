@@ -11,7 +11,7 @@ export default function Services() {
 
     // helper for whatsapp links
     const whatsappBase = (msg) =>
-        `https://wa.me/${"+918928755993".replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
+        `https://wa.me/${"+919820555659".replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
 
     useEffect(() => {
         // only activate behavior on small screens where cards are stacked

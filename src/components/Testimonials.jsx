@@ -17,19 +17,19 @@ export default function Testimonials() {
                     quote="The team completely transformed my living room. Their attention to detail and understanding of my style was outstanding."
                     name="RAHUL MEHTA"
                     city="Mumbai"
-                    rating={2}
+                    rating={5}
                 />
 
                 <TestimonialCard
                     quote="Beautiful designs and great execution. They made my 2BHK feel more spacious and modern without overspending."
                     name="PRIYA SHARMA"
                     city="Bangalore"
-                    rating={3}
+                    rating={4}
                 />
 
                 <TestimonialCard
                     quote="Their sense of aesthetics and space planning is unmatched. My office looks premium and has improved productivity."
-                    name="ARJUN REDDY"
+                    name="SUHASH SHIRDE"
                     city="Mumbai"
                     rating={5}
                 />

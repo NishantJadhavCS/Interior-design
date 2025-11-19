@@ -1,5 +1,5 @@
 :root {
-    /* palette & tokens (kept as you provided) */
+    /* palette & tokens */
     --clr-primary-dark: #0f2230;
     --clr-primary: #1a374d;
     --clr-primary-light: #2c6e91;
@@ -22,6 +22,7 @@
     --motion-spring: cubic-bezier(.2, .9, .3, 1);
 }
 
+/* Reset / base */
 * {
     box-sizing: border-box;
 }
@@ -32,7 +33,7 @@ body {
     padding: 0;
 }
 
-/* Container */
+/* Footer container */
 .footer-container {
     background: var(--clr-bg);
     color: var(--clr-text-dark);
@@ -44,20 +45,23 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Inner grid (desktop: 3 columns) */
+/* Desktop grid (4 columns) */
 .footer-inner {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Logo | Quick Links | Contact | Map */
     gap: 28px;
     align-items: start;
     justify-items: stretch;
 }
 
+/* Generic column */
 .footer-col {}
 
+/* ---------------- LEFT: Brand + socials ---------------- */
 .footer-left {
     text-align: left;
     display: flex;
@@ -67,6 +71,8 @@ body {
     align-items: flex-start;
 }
 
+/* Support both class names in case components use .brand or .brand-footer */
+.brand,
 .brand-footer {
     display: flex;
     flex-direction: column;
@@ -79,53 +85,43 @@ body {
     padding: 0;
 }
 
-/* logo + tagline */
+/* Logo - ensure block behavior and spacing below to avoid overlap */
 .brand-logo-footer {
     display: block !important;
     position: relative !important;
     float: none !important;
     width: 260px;
-    height: auto;
     max-width: 100%;
-    margin: 0;
+    height: auto;
+    margin: 0 0 6px 0;
+    /* space below logo */
     z-index: 1;
 }
 
+/* tagline below logo */
 .brand-tagline {
-    margin: 8px 0 0 0;
+    margin: 0;
     color: var(--clr-text-light);
     font-size: 14px;
     line-height: 1.45;
     max-width: 280px;
     display: block !important;
-    margin: 0;
-    padding: 0;
     z-index: 1;
 }
 
+/* Social icons row (always below tagline) */
 .socials {
-    margin-top: 6px;
-    display: flex;
-    gap: 14px;
-    position: relative !important;
-    margin: 0 !important;
-    transform: none !important;
-}
-
-.socials {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 14px !important;
     margin-top: 8px !important;
+    display: flex !important;
+    gap: 14px !important;
     position: relative !important;
-    /* prevent absolute positioning */
     top: auto !important;
     left: auto !important;
     clear: both !important;
-    /* ensure it clears any floats */
     z-index: 2 !important;
 }
 
+/* Social button (circular) */
 .social {
     width: 46px;
     height: 46px;
@@ -137,7 +133,7 @@ body {
     border: 1px solid var(--clr-border);
     box-shadow: var(--shadow-soft);
     color: var(--clr-accent-dark);
-    font-size: 18px;
+    font-size: 22px;
     text-decoration: none;
     transition:
         transform 220ms var(--motion-spring),
@@ -147,12 +143,12 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* icon element inside (font-awesome) */
+/* Font Awesome icon inside */
 .social i {
     pointer-events: none;
 }
 
-/* Hover/Focus */
+/* Hover/Focus: grow & use accent */
 .social:hover,
 .social:focus {
     transform: scale(1.1);
@@ -162,36 +158,33 @@ body {
     outline: none;
 }
 
-/* CENTER: nav (vertical stack by default) */
-.footer-center {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 3px;
+/* Heading for the links */
+.footer-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--clr-text-dark);
+    margin: 0 0 10px 0;
 }
 
-/* vertical nav - accessible larger touch targets */
+/* Vertical nav */
 .footer-nav {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
     align-items: flex-start;
 }
 
-/* link style & animation */
 .footer-nav a {
     display: inline-flex;
     align-items: center;
-    padding: 10px 6px;
-    /* large tappable area */
+    padding: 6px 6px;
     position: relative;
     text-decoration: none;
     color: var(--clr-text-dark);
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.3px;
     transition:
         color 0.25s ease,
@@ -199,7 +192,7 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Underline animation */
+/* Underline (hidden by default) */
 .footer-nav a::after {
     content: "";
     position: absolute;
@@ -214,10 +207,11 @@ body {
     transition: transform 0.28s ease;
 }
 
-/* Hover/focus animation (horizontal slide + underline) */
+/* Hover/focus animation */
 .footer-nav a:hover,
 .footer-nav a:focus {
     color: var(--clr-primary);
+    font-weight: 600;
     transform: translateX(4px);
 }
 
@@ -226,7 +220,42 @@ body {
     transform: scaleX(1);
 }
 
-/* RIGHT: map */
+/* ---------------- CONTACT column ---------------- */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.footer-contact .footer-heading {
+    margin-bottom: 12px;
+}
+
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-contact-list a {
+    color: var(--clr-text-dark);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    transition: color 0.2s ease;
+}
+
+.footer-contact-list a:hover,
+.footer-contact-list a:focus {
+    color: var(--clr-primary);
+    outline: none;
+}
+
+/* ---------------- RIGHT: Map ---------------- */
 .footer-right {
     display: flex;
     align-items: flex-start;
@@ -242,7 +271,7 @@ body {
     border: 1px solid var(--clr-border);
 }
 
-/* responsive aspect ratio for iframe */
+/* iframe styling */
 .footer-map {
     width: 100%;
     height: 200px;
@@ -251,7 +280,7 @@ body {
     object-fit: cover;
 }
 
-/* Bottom copyright */
+/* ---------------- Bottom row ---------------- */
 .footer-bottom {
     margin-top: 28px;
     border-top: 1px solid var(--clr-border);
@@ -261,39 +290,38 @@ body {
     font-size: 13px;
 }
 
-/* Focus-visible for keyboard users */
+/* Focus styles accessible */
 a:focus,
 button:focus {
     outline: 3px solid var(--clr-accent-light);
     outline-offset: 2px;
 }
 
-/* =============================== */
-/* MOBILE / SMALL SCREENS          */
-/* max-width: 880px and below      */
-/* =============================== */
+/* ===================== Responsive (mobile/stack) ===================== */
 
+/* Mobile / small screens stack everything */
 @media (max-width: 880px) {
     .footer-container {
         padding: 28px 16px;
     }
 
-    /* switch to single column stack */
     .footer-inner {
         grid-template-columns: 1fr;
+        /* single column stack */
         gap: 18px;
         align-items: center;
         justify-items: center;
     }
 
-    /* center everything in left column when stacked */
+    /* center left column on mobile */
     .footer-left {
         align-items: center;
         text-align: center;
         gap: 12px;
     }
 
-    .brand {
+    .brand,
+    .brand-footer {
         align-items: center;
         text-align: center;
     }
@@ -309,6 +337,7 @@ button:focus {
     }
 
     .socials {
+        justify-content: center;
         gap: 12px;
     }
 
@@ -318,7 +347,7 @@ button:focus {
         font-size: 20px;
     }
 
-    /* nav becomes centered, bigger touch targets */
+    /* center nav & enlarge hit area */
     .footer-center {
         width: 100%;
         justify-content: center;
@@ -339,10 +368,9 @@ button:focus {
 
     .footer-nav a::after {
         bottom: -6px;
-        /* slightly more spacing when centered */
     }
 
-    /* map becomes full-width and sits below nav */
+    /* Map full-width */
     .footer-right {
         width: 100%;
         justify-content: center;
@@ -359,18 +387,13 @@ button:focus {
         height: 220px;
     }
 
-    /* footer bottom spacing */
     .footer-bottom {
         margin-top: 22px;
         padding-top: 16px;
     }
 }
 
-/* =============================== */
-/* SMALL MOBILE TWEAKS (<=480px)   */
-/* extra touch target padding     */
-/* =============================== */
-
+/* Smaller phones tweak */
 @media (max-width: 480px) {
     .brand-logo-footer {
         width: 150px;
@@ -390,7 +413,6 @@ button:focus {
     .footer-nav a {
         font-size: 16px;
         padding: 14px 12px;
-        /* larger touch area */
     }
 
     .footer-map {
@@ -398,11 +420,7 @@ button:focus {
     }
 }
 
-/* =============================== */
-/* MEDIUM TABLETS (881px - 1100px)*/
-/* collapse right column to full-width map below */
-/* =============================== */
-
+/* Medium tablets: collapse map below columns */
 @media (min-width: 881px) and (max-width: 1100px) {
     .footer-inner {
         grid-template-columns: 1fr 1fr;
@@ -428,10 +446,7 @@ button:focus {
     }
 }
 
-/* =============================== */
-/* Accessibility helpers           */
-/* =============================== */
-
+/* Accessibility helper: skip link (if you use one) */
 .skip-link {
     position: absolute;
     left: -9999px;
@@ -453,7 +468,123 @@ button:focus {
     z-index: 9999;
 }
 
+/* Ensure map iframe accepts pointer events on mobile */
 .map-wrap iframe,
 .map-wrap .footer-map {
     pointer-events: auto;
+}
+
+/* Ensure heading is block and separated from nav */
+.footer-heading {
+    display: block;
+    /* make it a block-level element */
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--clr-text-dark);
+    margin: 0 0 12px 0;
+    /* space below heading */
+}
+
+/* Guarantee nav appears as a vertical block under the heading */
+.footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* keep nav left-aligned on desktop */
+.footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+/* Contact item: phone icon + number line */
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ============================= */
+/* CONTACT ICON = SOCIAL BUTTON  */
+/* ============================= */
+.contact-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--clr-text-dark);
+    font-weight: 500;
+    font-size: 16px;
+    padding: 6px 0;
+    transition: color 0.25s ease, transform 0.25s var(--motion-spring);
+}
+
+/* Circle phone icon styled same as .social */
+.contact-icon {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-soft);
+    color: var(--clr-accent-dark);
+    font-size: 18px;
+    transition:
+        transform 220ms var(--motion-spring),
+        background 220ms var(--motion-spring),
+        color 220ms var(--motion-spring),
+        box-shadow 220ms var(--motion-spring);
+}
+
+/* Hover matches socials */
+.contact-item a:hover .contact-icon,
+.contact-item a:focus .contact-icon {
+    transform: scale(1.1);
+    background: var(--clr-accent);
+    color: var(--clr-surface);
+    box-shadow: var(--shadow-medium);
+}
+
+.contact-item a:hover,
+.contact-item a:focus {
+    color: var(--clr-primary);
+    transform: translateX(4px);
+    font-weight: 600;
+}
+
+/* Make sure the phone icon itself doesn't capture pointer */
+.contact-icon i {
+    pointer-events: none;
+}
+
+/* Mobile: center headings and nav */
+@media (max-width: 880px) {
+
+    .footer-center,
+    .footer-contact {
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-nav,
+    .footer-contact-list {
+        align-items: center;
+    }
+
+    .contact-item a {
+        justify-content: center;
+    }
 }

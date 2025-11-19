@@ -5,7 +5,7 @@ import logo from "../assets/logo.svg";
 export default function Navbar() {
     const [open, setOpen] = useState(false);
 
-    const whatsappNumber = "+911234567890";
+    const whatsappNumber = "+919820555659";
     const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=Hi%20Contrive%20Designs`;
 
     return (
