@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="footer-inner">
                 {/* Left column: Logo (left) + Tagline below + Socials */}
                 <div className="footer-col footer-left">
-                    <div className="brand">
+                    <div className="brand-footer">
                         <img src={logo} alt="Contrive Designs" className="brand-logo-footer" />
                         
                         <p className="brand-tagline">Thoughtful interiors crafted for modern living.</p>

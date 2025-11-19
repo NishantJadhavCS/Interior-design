@@ -56,10 +56,8 @@ body {
     justify-items: stretch;
 }
 
-/* Columns base */
 .footer-col {}
 
-/* LEFT: brand column — left aligned */
 .footer-left {
     text-align: left;
     display: flex;
@@ -69,7 +67,7 @@ body {
     align-items: flex-start;
 }
 
-.brand {
+.brand-footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
