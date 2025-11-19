@@ -4,7 +4,7 @@ import "./css/testimonial.css";
 export default function Testimonials() {
     return (
         <div>
-            <div className="testimonials-header">
+            <div className="testimonials-header" id="testimonials">
                 <h2 className="section-title">What Our Clients Say</h2>
                 <p className="section-subtitle">
                     Hear from some of our satisfied customers who have transformed their
