@@ -1,0 +1,213 @@
+:root {
+    /* brand palette */
+    --clr-primary-dark: #0f2230;
+    --clr-primary: #1a374d;
+    --clr-primary-light: #2c6e91;
+    --clr-primary-xlight: #e8f1f5;
+    --clr-surface-50: #ebebeb;
+
+    /* accent palette */
+    --clr-accent-dark: #b87a16;
+    --clr-accent: #f5a623;
+    --clr-accent-light: #fde8bb;
+
+    /* neutrals */
+    --clr-text-dark: #1e293b;
+    --clr-text-light: #64748b;
+    --clr-bg: #fafafa;
+    --clr-surface: #ffffff;
+    --clr-border: #e5e7eb;
+
+    /* shadows & radii */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --radius-md: 10px;
+    --radius-lg: 16px;
+}
+
+/* ========================= */
+/* HERO WRAPPER              */
+/* ========================= */
+
+.maintenance-hero {
+    position: relative;
+    width: 100%;
+    margin-top: 90px;
+    min-height: calc(100vh - 90px);
+    overflow: hidden;
+    background: var(--clr-primary-dark);
+}
+
+/* Background image layer */
+.maintenance-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.05);
+    transition: transform 12s ease;
+}
+
+/* subtle slow zoom */
+.maintenance-hero:hover .maintenance-hero-bg {
+    transform: scale(1.09);
+}
+
+/* Overlay */
+.maintenance-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 34, 48, 0.65);
+    backdrop-filter: blur(4px);
+}
+
+/* Centering wrapper */
+.maintenance-hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    min-height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* ========================= */
+/* CARD                      */
+/* ========================= */
+
+.maintenance-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 30px 28px;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    backdrop-filter: blur(14px);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: maintenanceCardFade 0.9s ease forwards;
+}
+
+.maintenance-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes maintenanceCardFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================= */
+/* TYPOGRAPHY                */
+/* ========================= */
+
+.maintenance-eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--clr-accent-light);
+    margin-bottom: 0.6rem;
+}
+
+.maintenance-title {
+    font-size: clamp(1.9rem, 3.8vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--clr-surface);
+    margin-bottom: 1rem;
+}
+
+.maintenance-text {
+    font-size: 1rem;
+    color: var(--clr-primary-xlight);
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+}
+
+/* ========================= */
+/* CTA BUTTON — Shimmer      */
+/* ========================= */
+
+.maintenance-cta {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg,
+            var(--clr-accent),
+            var(--clr-accent-dark));
+    padding: 14px 34px;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* shimmer */
+.maintenance-cta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.75) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    transition: all 0.8s ease;
+}
+
+.maintenance-cta:hover::before {
+    left: 120%;
+}
+
+.maintenance-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+}
+
+.maintenance-cta:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ========================= */
+/* RESPONSIVE                */
+/* ========================= */
+
+@media (max-width: 768px) {
+    .maintenance-hero {
+        min-height: calc(100vh - 68px);
+    }
+
+    .maintenance-card {
+        padding: 24px 20px;
+        border-radius: var(--radius-md);
+    }
+
+    .maintenance-title {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+    }
+
+    .maintenance-text {
+        font-size: 0.95rem;
+    }
+
+    .maintenance-cta {
+        width: 100%;
+        text-align: center;
+    }
+}

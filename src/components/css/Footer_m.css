@@ -1,0 +1,21 @@
+:root {
+  --clr-primary-dark: #0f2230;
+  --clr-accent-light: #fde8bb;
+  --clr-text-light: #e5e7eb;
+}
+
+/* FOOTER */
+.maintenance-footer {
+  background: var(--clr-primary-dark);
+  text-align: center;
+  padding: 22px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.maintenance-footer-bottom {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clr-text-light);
+  opacity: 0.85;
+  letter-spacing: 0.3px;
+}

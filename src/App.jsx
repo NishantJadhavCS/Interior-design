@@ -5,17 +5,23 @@ import "./App.css";
 import Highlights from "./components/Highlights";
 import Footer from "./components/Footer";
 import Testimonials from "./components/Testimonials";
+import Navbar_m from "./components/Navbar_m";
+import Hero_m from "./components/Hero_m";
+import Footer_m from "./components/Footer_m";
 
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Navbar_m />
       <main>
-        <Hero />
+        <Hero_m />
+        {/* <Hero />
         <Services />
         <Highlights />
-        <Testimonials />
-        <Footer />
+        <Testimonials /> */}
+        {/* <Footer /> */}
+        <Footer_m />
       </main>
     </>
   );
