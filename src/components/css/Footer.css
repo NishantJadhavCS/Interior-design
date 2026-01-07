@@ -51,59 +51,63 @@ body {
     max-width: 1600px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     /* Logo | Quick Links | Contact | Map */
     gap: 28px;
     align-items: start;
     justify-items: stretch;
 }
 
-/* Generic column */
-.footer-col {}
+.footer-col {
+    align-items: center;
+}
 
-/* ---------------- LEFT: Brand + socials ---------------- */
 .footer-left {
-    text-align: left;
+    text-align: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 18px;
     justify-content: flex-start;
-    align-items: flex-start;
 }
 
-/* Support both class names in case components use .brand or .brand-footer */
 .brand-footer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 8px;
     position: relative;
-    /* keep children in normal flow */
     z-index: 0;
     margin: 0;
     padding: 0;
 }
+
+
 
 /* Logo - ensure block behavior and spacing below to avoid overlap */
 .brand-logo-footer {
     display: block !important;
     position: relative !important;
     float: none !important;
-    width: 260px;
+    width: 100%;
     max-width: 100%;
     height: auto;
     margin: 0 0 6px 0;
-    /* space below logo */
     z-index: 1;
+}
+
+.brand-logo-footer {
+    height: 264px;
+    width: auto;
 }
 
 /* tagline below logo */
 .brand-tagline {
+    font-family: "Cardo", serif;
     margin: 0;
-    color: var(--clr-text-light);
-    font-size: 14px;
+    color: var(--clr-text-dark);
+    font-weight: 700;
+    font-size: 18px;
     line-height: 1.45;
-    max-width: 280px;
     display: block !important;
     z-index: 1;
 }
@@ -132,7 +136,7 @@ body {
     border: 1px solid var(--clr-border);
     box-shadow: var(--shadow-soft);
     color: var(--clr-accent-dark);
-    font-size: 22px;
+    font-size: 26px;
     text-decoration: none;
     transition:
         transform 220ms var(--motion-spring),
@@ -326,13 +330,15 @@ button:focus {
     }
 
     .brand-logo-footer {
-        width: 180px;
+        height: 80px;
+        width: auto;
     }
 
     .brand-tagline {
         max-width: 320px;
         font-size: 14px;
-        color: var(--clr-text-light);
+        color: var(--clr-text-dark);
+        font-weight: 700;
     }
 
     .socials {
@@ -343,7 +349,7 @@ button:focus {
     .social {
         width: 50px;
         height: 50px;
-        font-size: 20px;
+        font-size: 22px;
     }
 
     /* center nav & enlarge hit area */
@@ -361,7 +367,6 @@ button:focus {
     .footer-nav a {
         font-size: 17px;
         padding: 12px 10px;
-        /* tappable area */
         text-align: center;
     }
 
@@ -395,18 +400,21 @@ button:focus {
 /* Smaller phones tweak */
 @media (max-width: 480px) {
     .brand-logo-footer {
-        width: 150px;
+        height: 190px;
+        width: auto;
     }
 
     .brand-tagline {
         font-size: 13px;
         max-width: 300px;
+        color: var(--clr-text-dark);
+        font-weight: 700;
     }
 
     .social {
         width: 48px;
         height: 48px;
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .footer-nav a {
@@ -441,7 +449,8 @@ button:focus {
     }
 
     .brand-logo-footer {
-        width: 220px;
+        height: 20px;
+        width: auto;
     }
 }
 

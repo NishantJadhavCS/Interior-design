@@ -1,6 +1,6 @@
-/* ========================= */
-/* ROOT VARIABLES            */
-/* ========================= */
+/* =========================
+   ROOT VARIABLES
+   ========================= */
 :root {
     --header-height: 90px;
     --navbar-inner-max-w: 1600px;
@@ -13,11 +13,18 @@
     --clr-surface: #ffffff;
 
     --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.04);
-    --motion-fast: 180ms;
-    --motion-medium: 260ms;
+    --shadow-medium: 0 12px 30px rgba(0, 0, 0, 0.08);
     --motion-spring: cubic-bezier(.2, .8, .25, 1);
+
+    --banner-height: 30px;
+    --banner-bg: var(--clr-accent-dark);
+    --banner-color: #fff;
+    --banner-speed: 40s;
 }
 
+/* =========================
+   HEADER / NAV
+   ========================= */
 .site-header {
     position: fixed;
     top: 0;
@@ -30,6 +37,7 @@
     border-bottom: 1px solid var(--clr-border);
     box-shadow: var(--shadow-soft);
     z-index: 9999;
+      overflow-x: hidden;
 }
 
 .header-inner {
@@ -41,56 +49,52 @@
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 50px;
+    position: relative;
+    /* positioning context for absolute children */
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: transform .3s var(--motion-spring), filter .3s ease;
+}
+
+.brand:hover,
+.brand:focus {
+    transform: translateY(-4px) scale(1.03);
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.12));
 }
 
 .brand-logo {
-    height: 42px;
+    height: 70px;
     width: auto;
 }
 
+/* Desktop only helper */
 .desktop-only {
     display: flex;
     justify-content: center;
 }
 
-/* ========================= */
-/* NAV LINKS (DESKTOP)       */
-/* ========================= */
-
+/* Nav links */
 .nav-links {
     display: inline-flex;
     gap: 18px;
     list-style: none;
     padding: 8px 10px 10px;
-    transition:
-        color 0.25s ease,
-        transform 0.25s var(--motion-spring);
 }
 
 .nav-links a {
     display: inline-flex;
-    /* allow vertical movement */
     align-items: center;
     padding: 8px 10px 7px;
-    /* bottom padding creates space to float */
     position: relative;
     text-decoration: none;
     color: var(--clr-text-light);
     font-weight: 600;
-    transition:
-        color 0.25s ease,
-        transform 0.25s var(--motion-spring);
+    transition: color .25s ease, transform .25s var(--motion-spring);
 }
-
-/* ========================= */
-/* UNDERLINE ANIMATION       */
-/* ========================= */
 
 .nav-links a::after {
     content: "";
@@ -103,23 +107,19 @@
     border-radius: 3px;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform .3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a:focus {
     color: var(--clr-primary);
-    transform: translateY(-2px) scale(0.98);
+    transform: translateY(-2px) scale(.98);
 }
 
 .nav-links a:hover::after,
 .nav-links a:focus::after {
     transform: scaleX(1);
 }
-
-/* ========================= */
-/* Desktop Contact Button    */
-/* ========================= */
 
 .btn-contact {
     position: relative;
@@ -197,9 +197,232 @@
     box-shadow: 0 0 0 3px rgba(26, 55, 77, 0.25);
 }
 
-/* ========================= */
-/* MOBILE ONLY BEHAVIOR      */
-/* ========================= */
+/* =========================
+   MOBILE / HAMBURGER
+   ========================= */
+.menu-toggle-mobile {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    color: var(--clr-text-light);
+}
+
+/* MOBILE layout tweaks only */
+@media (max-width: 860px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .menu-toggle-mobile {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* shorter header on mobile and center logo vertically */
+    .header-inner {
+        grid-template-columns: auto 1fr auto;
+        height: 64px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+    }
+
+    .brand {
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        transform: translate(-50%, -50%);
+    }
+
+    .brand-logo {
+        height: 56px;
+    }
+
+    /* absolute hamburger (left) */
+    .menu-toggle-mobile {
+        position: absolute;
+        left: 12px;
+        top: 70%;
+        transform: translateY(-50%);
+        z-index: 11000;
+        padding: 8px;
+    }
+
+    .menu-toggle-mobile svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* =========================
+   MOBILE DRAWER & OVERLAY
+   ========================= */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    z-index: 9998;
+}
+
+.nav-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+    transform: translateX(-100%);
+    transition: transform .35s cubic-bezier(.2, .8, .25, 1);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+/* fixed banner under header */
+.tagline-banner {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    height: var(--banner-height, 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--clr-primary-dark);
+    border-bottom: 1px solid var(--clr-primary);
+    padding: 0 12px;
+    z-index: 9998;
+    box-sizing: border-box;
+}
+
+.tagline-banner__inner {
+    font-family: "Cardo", serif;
+    max-width: var(--navbar-inner-max-w, 1600px);
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* text */
+.tagline-banner__text {
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #ffffff;
+    /* white text on dark banner */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* fade animation class */
+.tagline-banner__text.fade-out {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+/* push body down so content isn't hidden under header+banner */
+body {
+    padding-top: calc(var(--header-height) + var(--banner-height, 44px));
+}
+
+/* small screens */
+@media (max-width: 640px) {
+    .tagline-banner__text {
+        font-size: 0.9rem;
+    }
+}
+
+/* =========================
+   HEADER HIDE/SHOW + BANNER STICKY
+   ========================= */
+
+/* header slide up when hidden */
+.site-header {
+    transition: transform .32s var(--motion-spring), opacity .25s ease;
+    will-change: transform;
+}
+
+.site-header--hidden {
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tagline-banner {
+    transition: top .28s var(--motion-spring), transform .28s var(--motion-spring);
+    top: var(--header-height);
+}
+
+/* add this class when header is hidden (applied in JSX) */
+.tagline-banner--top {
+    top: 0;
+}
+
+/* ensure header transition doesn't cause reflow issues */
+.header-inner,
+.tagline-banner__inner {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+
+/* MOBILE adjustments */
+@media (max-width: 720px) {
+    .tagline-banner {
+        padding: 6px 12px;
+        min-height: var(--banner-height-mobile, 56px);
+    }
+
+    .tagline-banner__text {
+        -webkit-line-clamp: 2;
+        text-align: center;
+        font-size: clamp(0.78rem, 2.6vw, 0.95rem);
+        line-height: 1.18;
+    }
+
+    body {
+        padding-top: calc(var(--header-height) + var(--banner-height-mobile, 56px));
+    }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+    .tagline-banner {
+        padding: 6px 10px;
+        min-height: var(--banner-height-mobile, 60px);
+    }
+
+    .tagline-banner__text {
+        font-size: clamp(0.72rem, 3.2vw, 0.88rem);
+    }
+
+    body {
+        padding-top: calc(var(--header-height) + var(--banner-height-mobile, 60px));
+    }
+}
+
 
 .menu-toggle-mobile {
     display: none;
@@ -216,25 +439,9 @@
         display: none !important;
     }
 
-    /* Show hamburger */
     .menu-toggle-mobile {
         display: inline-flex;
         align-items: center;
-    }
-
-    .header-inner {
-        grid-template-columns: auto 1fr auto;
-        height: 64px;
-        padding: 0 16px;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    /* Center logo on mobile */
-    .brand {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 

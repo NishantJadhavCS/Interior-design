@@ -1,0 +1,393 @@
+/* PackageModal.css */
+
+.package-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: grid;
+    place-items: center;
+    z-index: 10001;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.package-modal {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Close Button - Restored to simpler style */
+.package-modal__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 8px;
+    border-radius: 50%;
+    color: #4b5563;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.package-modal__close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #111827;
+    transform: rotate(90deg);
+}
+
+/* Header Section */
+.package-modal__header-content {
+    background: linear-gradient(to bottom, #fff, #fafafa);
+    padding: 1.5rem 1.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.package-modal__title {
+    font-size: 1.3rem;
+    /* Matched to Services card title */
+    font-weight: 700;
+    color: var(--clr-primary);
+    margin: 0 0 1rem;
+    line-height: 1.2;
+}
+
+/* Emphasized Price Badge */
+.package-modal__price-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--clr-primary, #eebf00);
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.package-modal__price-badge:hover {
+    transform: scale(1.02);
+}
+
+.price-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #fff;
+    opacity: 0.95;
+}
+
+.price-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin: 0.2rem 0;
+}
+
+/* Modal Body */
+.package-modal__body {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Table Styling */
+.package-modal__table-wrap {
+    margin-bottom: 2rem;
+}
+
+.package-modal__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.package-modal__table th {
+    text-align: left;
+    color: #6b7280;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 1.5rem 0.5rem;
+    font-weight: 600;
+}
+
+.package-modal__table td {
+    background: #f9fafb;
+    padding: 1.25rem 1.5rem;
+    font-size: 1rem;
+    color: #374151;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.package-modal__table tr:first-child td:first-child {
+    border-top-left-radius: 12px;
+}
+
+.package-modal__table tr:first-child td:last-child {
+    border-top-right-radius: 12px;
+}
+
+.package-modal__table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.package-modal__table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.package-modal__table tr:hover td {
+    background: #fff;
+    /* Just background highlight, no floating/z-index */
+    border-radius: 12px;
+}
+
+.col-inclusion {
+    font-weight: 700;
+    color: #111827;
+    width: 35%;
+}
+
+.col-spec {
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.tag-x2 {
+    display: inline-block;
+    background: #111827;
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Notes */
+.package-note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #fffbeb;
+    border-radius: 12px;
+    border: 1px solid #fcd34d;
+}
+
+.highlight-note {
+    margin-top: 0.5rem;
+    color: #b45309;
+    font-weight: 600;
+}
+
+/* Actions */
+.package-modal__actions {
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-top: 1rem;
+    margin-top: 0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+/* Restored Button Styles (Pill with sliding icon) */
+.button {
+    --clr: var(--clr-primary-light, #e9defc);
+    --clr-hover: var(--clr-primary-dark, #6c4cff);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--clr);
+    color: var(--clr-primary-dark, #24124f);
+    border: none;
+    padding: 0.75rem 1.6rem 0.75rem 1.3rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: background-color 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease, color 0.3s ease;
+    overflow: hidden;
+}
+
+/* Icon circle */
+.button__icon-wrapper {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--clr);
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button__icon-svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    display: block;
+    transition: transform 0.3s cubic-bezier(.2, .8, .25, 1);
+}
+
+.button__icon-svg--copy {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-150%, 150%);
+}
+
+.button:hover {
+    background-color: var(--clr-hover);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+}
+
+.button:hover .button__icon-wrapper {
+    background-color: var(--clr-hover);
+    color: #fff;
+}
+
+.button:hover .button__icon-svg:first-child {
+    transform: translate(150%, -150%);
+}
+
+.button:hover .button__icon-svg--copy {
+    transform: translate(-50%, -50%);
+}
+
+.button__text {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.button:hover .button__text {
+    transform: translateX(4px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .package-modal__close {
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .package-modal__title {
+        font-size: 1.5rem;
+        padding-right: 40px;
+        /* Prevent overlap with close button */
+        margin-top: 10px;
+    }
+
+    .package-modal__price-badge {
+        padding: 0.75rem 2rem;
+    }
+
+    .price-value {
+        font-size: 2rem;
+    }
+
+    .package-modal__body {
+        padding: 1.5rem;
+    }
+
+    .package-modal__table th {
+        display: none;
+    }
+
+    .package-modal__table td {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem;
+        /* Reset border radius for mobile stack */
+        border-radius: 0;
+    }
+
+    .col-inclusion {
+        background: #e5e7eb;
+        border-radius: 8px 8px 0 0 !important;
+        margin-bottom: 0px;
+    }
+
+    .col-spec {
+        background: #f3f4f6;
+        border-radius: 0 0 8px 8px !important;
+        margin-bottom: 1rem;
+    }
+
+    .package-modal__table {
+        border-spacing: 0;
+    }
+
+    .package-modal__table tr:hover td {
+        /* Disable the desktop float effect on mobile if desired, or keep it */
+        /* background: inherit; */
+    }
+
+    /* Ensure individual cells in the stack animate together or separately? 
+       Actually on mobile they are stacked separate visually. 
+       Let's keep it simple for mobile. */
+    .package-modal__table tr:hover .col-inclusion,
+    .package-modal__table tr:hover .col-spec {
+        background: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+}

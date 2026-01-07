@@ -1,28 +1,45 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
+import Projects from "./components/Projects";
 import "./App.css";
 import Highlights from "./components/Highlights";
 import Footer from "./components/Footer";
 import Testimonials from "./components/Testimonials";
-import Navbar_m from "./components/Navbar_m";
-import Hero_m from "./components/Hero_m";
-import Footer_m from "./components/Footer_m";
+import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import ScrollingBrands from "./components/ScrollingBrands";
+import Flow from "./components/Flow";
+
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,              // 100ms is too fast for UX
+      once: false,                // allow repeat on scroll
+      easing: "ease-out-cubic",
+      offset: 40,
+      mirror: false,              // IMPORTANT: prevents reverse flicker
+      anchorPlacement: "top-bottom",
+    });
+  }, []);
+
   return (
     <>
-      {/* <Navbar /> */}
-      <Navbar_m />
+      <Navbar />
       <main>
-        <Hero_m />
-        {/* <Hero />
+        <Hero />
         <Services />
+        <Projects />
         <Highlights />
-        <Testimonials /> */}
-        {/* <Footer /> */}
-        <Footer_m />
+        <Flow />
+        <Testimonials />
+        <ScrollingBrands />
       </main>
+      <Footer />
+      <FloatingWhatsAppButton />
     </>
   );
 }

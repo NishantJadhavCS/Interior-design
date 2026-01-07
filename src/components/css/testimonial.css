@@ -2,119 +2,137 @@
    Testimonials Header 
 ======================================= */
 .testimonials-header {
-    padding-top: 2.5rem;
+    padding-top: 3rem;
     text-align: center;
-    font-size: 25px;
-    font-weight: 900;
-    color: var(--clr-primary);
-    margin-bottom: -30px;
-    /* Pulls the grid section up closer to the header */
+    margin-bottom: 2rem;
 }
 
-.testimonials-header p {
-    color: var(--clr-primary);
-    font-weight: 500;
-    font-size: 18px;
+.testimonials-header .section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--clr-primary, #111827);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.testimonials-header .section-subtitle {
+    color: #4b5563;
+    font-weight: 400;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0.5rem auto 0;
+    line-height: 1.6;
 }
 
 @media (max-width: 650px) {
-    .testimonials-header {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 10px;
+    .testimonials-header .section-title {
+        font-size: 1.75rem;
     }
 
-    .testimonials-header p {
-        font-weight: 500;
-        font-size: 1.2rem;
+    .testimonials-header .section-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
     }
 }
 
 
 /* =======================================
-   Testimonials Section 🌟 (Grid Setup)
+   Testimonials Section (Grid)
 ======================================= */
 .testimonials-section {
     display: grid;
-    /* Desktop: 3 columns, each 25% of the container width */
-    grid-template-columns: repeat(3, 23%);
-    justify-content: center;
-    /* Centers the whole grid */
-    gap: 24px;
-    padding: 60px 20px;
-
-    /* Section Background Gradient */
-    background: #fafafa
+    /* Desktop: 3 columns */
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 32px;
+    padding: 40px 24px 80px;
 }
 
-/* Tablet Layout (max-width: 900px) */
-@media (max-width: 900px) {
+/* Tablet Layout */
+@media (max-width: 960px) {
     .testimonials-section {
-        /* Tablet/Small Desktop: 2 equal-width columns */
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 40px 15px;
-        /* Disable center justification when using 1fr to fill space */
-        justify-content: unset;
+        gap: 24px;
+        padding: 40px 24px 60px;
     }
 }
 
 /* =======================================
-   Mobile Carousel (max-width: 650px) 📱
-   Switches from vertical grid to horizontal scroll
+   Mobile Carousel (max-width: 650px)
 ======================================= */
 @media (max-width: 650px) {
     .testimonials-section {
         display: flex;
-        /* Switch back to flex for horizontal layout */
         grid-template-columns: unset;
-        /* Remove grid columns */
-        overflow-x: scroll;
-        /* Enable horizontal scrolling */
-        overflow-y: hidden;
-        /* Prevent vertical scrolling inside */
+        overflow-x: auto;
         scroll-snap-type: x mandatory;
-        /* Force snapping horizontally */
-
-        /* Adjust padding for carousel view */
-        padding: 40px 0;
+        padding: 20px 24px 60px;
+        /* Right padding ensures last card isn't flush */
         gap: 16px;
-
-        /* Optional: Hide Scrollbar for cleaner look */
-        -ms-overflow-style: none;
-        /* IE and Edge */
         scrollbar-width: none;
         /* Firefox */
     }
 
-    /* Hide Scrollbar for Chrome/Safari */
     .testimonials-section::-webkit-scrollbar {
         display: none;
+        /* Chrome/Safari */
     }
 
     .testimonial-card {
-        width: 85vw;
-        /* Card takes up 85% of the viewport width */
-        flex-shrink: 0;
-        /* Important: Prevents cards from shrinking */
+        min-width: 85vw;
+        /* Card width on mobile */
         scroll-snap-align: center;
-        /* Snap the card to the center of the viewport */
     }
 
-    /* Give the first and last card some space from the edge */
     .testimonial-card:first-child {
-        margin-left: 20px;
-    }
-
-    .testimonial-card:last-child {
-        margin-right: 20px;
+        margin-left: 0;
+        /* Align perfectly with container padding */
     }
 }
 
+
 /* =======================================
-   Fade-In Animation Keyframes
+   Testimonial Card (Modern Premium)
 ======================================= */
-@keyframes fadeIn {
+.testimonial-card {
+    position: relative;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeUpCard 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+/* Active state (hover or in-view on mobile) */
+.testimonial-card:hover,
+.testimonial-card.in-view {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.0);
+}
+
+.testimonial-card:hover .quote-icon,
+.testimonial-card.in-view .quote-icon {
+    color: rgba(0, 0, 0, 0.6);
+    /* Much darker as requested */
+    transform: scale(1.3) rotate(-5deg);
+}
+
+/* Float starts on hover or in-view */
+.testimonial-card:hover .stars,
+.testimonial-card.in-view .stars {
+    transform: translateY(-5px);
+    transition: transform 0.4s ease;
+}
+
+@keyframes fadeUpCard {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -126,33 +144,7 @@
     }
 }
 
-/* =======================================
-   Testimonial Card 💎 (Refined Style & Animation)
-======================================= */
-.testimonial-card {
-    padding: 30px;
-    border-radius: 20px;
-    border: none;
-
-    /* Refined Card Background Gradient */
-    background: linear-gradient(145deg, #ffffff 0%, #f4f8ff 100%);
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    min-height: 280px;
-    /* Smoother transition curve for all properties */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-    /* Apply Fade-In Animation */
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
-}
-
-/* Animation Delay for Staggered Effect */
+/* Stagger Animations */
 .testimonial-card:nth-child(1) {
     animation-delay: 0.1s;
 }
@@ -165,108 +157,100 @@
     animation-delay: 0.3s;
 }
 
-/* Add more :nth-child rules if you have more than 3 cards initially visible */
 
-
-/* Enhanced Hover Effect */
-.testimonial-card:hover {
-    transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(145deg, #ffffff 0%, #ebf2ff 100%);
-}
-
-/* =======================================
-   Quote Icon 💬
-======================================= */
+/* Static Quote Mark Watermark */
 .quote-icon {
-    font-size: 44px;
-    color: #4c8aff;
-    margin-bottom: 12px;
-    text-align: center;
-    /* Subtle pulsating effect */
-    animation: pulse 2s infinite alternate;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 4rem;
+    line-height: 1;
+    font-family: serif;
+    /* Use a nice serif font locally available */
+    color: rgba(0, 0, 0, 0.04);
+    pointer-events: none;
+    user-select: none;
+    transition: all 0.4s ease;
 }
 
-@keyframes pulse {
-    from {
-        color: #4c8aff;
-    }
-
-    to {
-        color: #81b4ff;
-    }
-}
-
-
-/* =======================================
-   Quote Text
-======================================= */
+/* Content */
 .quote {
-    color: #374151;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-style: italic;
-    text-align: center;
-    padding: 0 5px;
+    font-family: 'Inter', sans-serif;
+    /* Or site default */
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #282f38;
+    /* Dark gray for readability */
+    margin: 1.5rem 0 2rem;
+    position: relative;
+    z-index: 1;
+    font-style: normal;
+    /* Cleaner, modern look */
+    text-align: left;
 }
 
-/* =======================================
-   Stars ⭐
-======================================= */
+/* Stars */
 .stars {
     display: flex;
-    justify-content: center;
     gap: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    /* Align with bottom */
 }
 
 .star {
-    font-size: 24px;
-    color: #d1d5db;
-    cursor: default;
-    transition: transform 0.2s ease, color 0.4s ease;
+    font-size: 1.15rem;
+    color: #e5e7eb;
+    transition: transform 0.2s ease;
 }
 
 .star.filled {
-    color: #ffc107;
+    color: #fbbf24;
+    /* Amber-400 */
+    /* 3D Pop Effect */
+    text-shadow: 1px 1px 0px #d97706, 0 2px 5px rgba(251, 191, 36, 0.4);
+    transform: translateZ(0);
+    /* optimize rendering */
 }
 
-/* =======================================
-   Profile Info 👤
-======================================= */
+/* Profile / Footer */
 .profile {
-    text-align: center;
-    padding-top: 10px;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .name {
-    font-weight: 800;
-    font-size: 16px;
-    color: #1f2937;
-    margin-bottom: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #111827;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
 }
 
 .city {
-    font-size: 14px;
-    color: #6b7280;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    font-weight: 500;
+    text-align: left;
 }
 
-/* =======================================
-   Responsive Tweaks (Card sizes in carousel view)
-======================================= */
+/* Mobile Tweaks */
 @media (max-width: 600px) {
     .testimonial-card {
-        padding: 25px;
-        min-height: auto;
+        padding: 2rem 1.75rem;
     }
 
     .quote {
-        font-size: 16px;
-        margin-bottom: 15px;
+        font-size: 1rem;
     }
 
-    .star {
-        font-size: 22px;
+    .quote-icon {
+        font-size: 3.5rem;
+        top: 1rem;
+        left: 1.25rem;
     }
 }

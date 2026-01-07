@@ -1,3 +1,6 @@
+/* Highlights.css — static, responsive, 3-cards layout (cleaned & mobile-friendly) */
+
+/* Section */
 .highlights {
     background: var(--clr-surface-50);
     padding: 28px 10px;
@@ -5,11 +8,13 @@
 }
 
 .highlights-inner {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     position: relative;
+    padding: 0 12px;
 }
 
+/* Heading */
 .highlights-heading {
     text-align: center;
     margin-bottom: 32px;
@@ -24,40 +29,32 @@
 
 .hi-subtitle {
     margin: 8px 0 0;
-    font-size: 14px;
-    color: var(--clr-text-light);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--clr-text-dark);
 }
 
+/* Grid wrapper (works for .cards-grid or .scroll-track markup) */
+.cards-grid,
 .scroll-track {
-    display: flex;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px 40px;
+    /* row-gap / column-gap */
     align-items: stretch;
-    will-change: transform;
-    animation: scroll-left 2s linear infinite;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.highlights:hover .scroll-track,
-.highlights:focus-within .scroll-track {
-    animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .scroll-track {
-        animation: none !important;
-    }
-}
-
+/* Card */
 .highlight-card {
     display: flex;
-    /* row layout: icon | text */
     flex-direction: row;
     align-items: center;
-    /* vertical center of icon + text */
     gap: 14px;
-    flex: 0 0 auto;
-    width: 300px;
+    width: 100%;
     min-height: 130px;
-    /* ensures uniform card height */
     background: var(--clr-surface);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
@@ -67,29 +64,26 @@
     transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-
-/* Slight lift on hover */
+/* Hover / focus lift (preserved for non-touch) */
 .highlight-card:hover,
 .highlight-card:focus-within {
     transform: translateY(-6px);
     box-shadow: var(--shadow-medium);
 }
 
-/* Icon wrapper: fixed square, center the GIF exactly */
+/* Icon wrapper */
 .icon-wrap {
     flex: 0 0 72px;
-    /* fixed size so icons line up */
     width: 72px;
     height: 72px;
     display: grid;
     place-items: center;
-    /* center gif perfectly */
     border-radius: var(--radius-md);
     background: linear-gradient(180deg, var(--clr-primary-xlight, rgba(26, 55, 77, 0.06)), rgba(26, 55, 77, 0.04));
     box-sizing: border-box;
 }
 
-/* GIF sizing: keep contained and consistent */
+/* GIF/icon */
 .hi-gif {
     width: 56px;
     height: 56px;
@@ -97,17 +91,14 @@
     display: block;
 }
 
-/* Text area: vertical center + avoid collapse when multi-line */
+/* Text block */
 .card-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* vertically center text lines */
     min-height: 56px;
-    /* ensures text block lines up with icon */
 }
 
-/* Make sure titles & descriptions align visually */
 .card-title {
     margin: 0;
     font-size: 17px;
@@ -119,24 +110,21 @@
 .card-desc {
     margin: 6px 0 0 0;
     font-size: 15px;
-    color: var(--clr-text-light);
+    color: var(--clr-text-dark);
     line-height: 1.25;
 }
 
-@keyframes scroll-left {
-    0% {
-        transform: translateX(0);
-    }
+/* ---------- Responsive adjustments ---------- */
 
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-/* Large desktop — widen cards slightly, moderate gap, slightly slower animation */
+/* Large desktop — slightly larger cards */
 @media (min-width: 1200px) {
+
+    .cards-grid,
+    .scroll-track {
+        gap: 32px 50px;
+    }
+
     .highlight-card {
-        width: 340px;
         min-height: 140px;
         padding: 24px;
     }
@@ -150,17 +138,17 @@
         width: 80px;
         height: 80px;
     }
-
-    .scroll-track {
-        gap: 100px;
-        animation-duration: 10s;
-    }
 }
 
-/* Desktop / laptop */
+/* Desktop / laptop (mid) */
 @media (min-width: 900px) and (max-width: 1199px) {
+
+    .cards-grid,
+    .scroll-track {
+        gap: 28px 80px;
+    }
+
     .highlight-card {
-        width: 320px;
         min-height: 135px;
         padding: 22px;
     }
@@ -174,19 +162,18 @@
         width: 84px;
         height: 84px;
     }
-
-    .scroll-track {
-        gap: 80px;
-        /* reduced gap for tighter frequency */
-        animation-duration: 7s;
-        /* faster than previous */
-    }
 }
 
-/* Tablet */
+/* Tablet: 2 columns */
 @media (min-width: 600px) and (max-width: 899px) {
+
+    .cards-grid,
+    .scroll-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 48px;
+    }
+
     .highlight-card {
-        width: 300px;
         min-height: 130px;
         padding: 20px;
     }
@@ -200,42 +187,32 @@
         width: 72px;
         height: 72px;
     }
-
-    .scroll-track {
-        gap: 48px;
-        /* smaller gap for more frequency */
-        animation-duration: 5.5s;
-        /* faster to keep rhythm */
-    }
 }
 
+/* Mobile: single column with side gutters, narrower cards and larger left/right padding */
 @media (max-width: 599px) {
+    .highlights-inner {
+        padding: 0 20px;
+        /* larger side gutter on phones */
+    }
 
+    .cards-grid,
     .scroll-track {
-        animation: none;
-        gap: 12px;
-        /* tighter than before so cards feel more frequent */
-        display: flex;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 8px;
-        /* space for scrollbar */
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-    /* Each card becomes a snap point */
     .highlight-card {
-        flex: 0 0 auto;
-        width: calc(78% - 12px);
-        /* card occupies most of viewport */
-        min-height: 120px;
-        padding: 18px;
-        scroll-snap-align: start;
+        width: 100%;
+        max-width: 640px;
+        min-height: 110px;
+        padding: 16px;
+        align-items: center;
     }
 
-    /* Slightly smaller icon / gif for mobile */
     .icon-wrap {
         flex: 0 0 48px;
+        width: 48px;
         height: 48px;
     }
 
@@ -244,28 +221,28 @@
         height: 48px;
     }
 
-    /* Keep hover pause rule harmless */
-    .highlights:hover .scroll-track,
-    .highlights:focus-within .scroll-track {
-        animation-play-state: paused;
+    /* Reduce hover motion on touch devices */
+    .highlight-card,
+    .highlight-card:hover,
+    .highlight-card:focus-within {
+        transform: none;
+        box-shadow: var(--shadow-soft);
     }
 
-    /* Subtle scrollbar (WebKit) */
-    .scroll-track::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .scroll-track::-webkit-scrollbar-thumb {
-        background: rgba(26, 55, 77, 0.12);
-        border-radius: 999px;
+    /* Ensure touch performance */
+    .highlight-card {
+        touch-action: manipulation;
     }
 }
 
-/* Extra small phones — tighten sizes */
+/* Extra small phones */
 @media (max-width: 420px) {
+    .highlights-inner {
+        padding: 0 18px;
+    }
+
     .highlight-card {
-        width: calc(86% - 16px);
-        min-height: 110px;
+        min-height: 100px;
         padding: 14px;
     }
 
@@ -285,5 +262,27 @@
 
     .card-desc {
         font-size: 14px;
+    }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Mobile: add safe side padding to heading */
+@media (max-width: 599px) {
+    .highlights-heading {
+        padding: 0 20px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 420px) {
+    .highlights-heading {
+        padding: 0 18px;
     }
 }

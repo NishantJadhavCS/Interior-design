@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import "./css/Hero.css";
-import hero1 from "../assets/hero1.jpg";
-import hero2 from "../assets/hero2.jpg";
+import hero1 from "../assets/hero2.jpg";
+import hero2 from "../assets/site1/site1-1.jpg";
 
 export default function Hero() {
     const slides = [
         {
             image: hero1,
-            title: "Affordable 1 & 2 BHK Interiors — Ready in Just 40 Days.",
+            title: "Standard 1 BHK & 2 BHK Packages, Ready in Just 40 Days.",
             buttonText: "View Packages",
             buttonLink: "#packages",
         },
         {
             image: hero2,
-            title: "Preset or Custom Interior Solutions for Every Budget.",
+            title: "Custom Interior Solutions for Every Budget.",
             buttonText: "Get Free Consultation",
             buttonLink: "#contact",
         },
@@ -39,7 +39,7 @@ export default function Hero() {
 
     useEffect(() => {
         if (!isPaused) {
-            intervalRef.current = setInterval(nextSlide, 6000);
+            intervalRef.current = setInterval(nextSlide, 15000);
         }
         return () => {
             if (intervalRef.current) {
@@ -59,10 +59,8 @@ export default function Hero() {
     };
 
     const onPointerDown = (e) => {
-        // ignore right-click
         if (e.pointerType === "mouse" && e.button !== 0) return;
 
-        // if the direct element pressed is interactive, don't start a drag (so arrows, links work)
         if (isInteractiveTarget(e.target)) return;
 
         pointerIdRef.current = e.pointerId;
@@ -136,7 +134,6 @@ export default function Hero() {
     const onPointerCancel = (e) => finishPointer(e);
     const onLostPointerCapture = (e) => finishPointer(e);
 
-    // Render slides positioned horizontally using translateX + dragOffset
     const renderSlides = () => {
         const width = containerWidth() || 1;
         const dragPercent = (dragOffset / width) * 100;

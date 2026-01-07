@@ -1,0 +1,187 @@
+.contact-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: grid;
+    place-items: center;
+    z-index: 10001;
+    padding: 1rem;
+    animation: fadeInOverlay 0.3s ease;
+}
+
+/* Modal Container */
+.contact-modal {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    animation: slideUpModal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Header */
+.contact-modal-head {
+    position: relative;
+    text-align: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(to bottom, #fff, #fafafa);
+}
+
+.contact-modal-head h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Close Button (Matching PackageModal) */
+.contact-modal-head .package-modal__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 8px;
+    border-radius: 50%;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.contact-modal-head .package-modal__close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #111827;
+    transform: rotate(90deg);
+}
+
+/* Body */
+.contact-form {
+    padding: 2rem;
+    text-align: left;
+}
+
+/* Inputs */
+.contact-form label {
+    display: block;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    margin-top: 0.5rem;
+    background: #f9fafb;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #1f2937;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    background: #fff;
+    border-color: var(--clr-primary, #6C4CFF);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(108, 76, 255, 0.1);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Submit Button - Ensuring it pops locally */
+.contact-form .button {
+    width: auto;
+    min-width: 200px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    font-size: 1.05rem;
+    background-color: var(--clr-primary, #6C4CFF);
+    color: #fff;
+    border-radius: 99px;
+    box-shadow: 0 10px 20px rgba(108, 76, 255, 0.2);
+}
+
+.contact-form .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(108, 76, 255, 0.3);
+}
+
+.contact-form .button .button__icon-wrapper {
+    background: #fff;
+    color: var(--clr-primary, #6C4CFF);
+}
+
+/* Animations */
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpModal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ================= Mobile Responsive ================= */
+
+@media (max-width: 600px) {
+    .contact-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+        /* Slide up from bottom on mobile? Or center? Center is safer for forms */
+        align-items: center;
+    }
+
+    .contact-modal {
+        max-width: 100%;
+        width: 95%;
+        border-radius: 20px;
+        max-height: 85vh;
+        /* give some room for keyboard */
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .contact-modal-head h3 {
+        font-size: 1.25rem;
+    }
+}

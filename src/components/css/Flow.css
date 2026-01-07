@@ -1,0 +1,244 @@
+/* Flow.css */
+.flow-section {
+    padding: 3rem 1rem;
+    background-color: var(--background-color, #ffffff);
+    /* Optional subtle gradient for modern feel */
+    background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+    text-align: center;
+    overflow: hidden;
+}
+
+.flow-header {
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.flow-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--clr-primary, #eebf00);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.flow-subtitle {
+    font-size: 1.1rem;
+    color: var(--clr-text-dark, #333);
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.flow-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    padding: 1rem;
+}
+
+.flow-stepper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    gap: 1rem;
+}
+
+/* Horizontal connecting line */
+.stepper-line {
+    position: absolute;
+    top: 74px;
+    /* Aligns with the center of the icon circle (100px height / 2) */
+    left: 5%;
+    width: 90%;
+    height: 3px;
+    background: #c2c0c0;
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.flow-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 180px;
+    /* Ensure columns doesn't squash too much */
+}
+
+/* Icon Styles */
+.step-marker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.step-icon-wrapper {
+    width: 150px;
+    height: 150px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    /* Soft shadow for depth */
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    border: 3px solid white;
+    /* clean border against the line */
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* Dot on the line */
+.step-dot {
+    width: 14px;
+    height: 14px;
+    background: var(--clr-primary, #eebf00);
+    border: 3px solid white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -7px;
+    /* Sit on the bottom edge if we want, or adjust to be unconnected */
+    /* Let's hide the dot for this specific design if the icon is the marker, 
+       OR place it on the line below the icon? 
+       Actually, effectively the big circle IS the dot. Let's hide the small dot for desktop. 
+    */
+    display: none;
+}
+
+
+/* Hover Effects */
+.flow-step:hover .step-icon-wrapper {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-color: var(--clr-primary, #eebf00);
+}
+
+/* Content Styles */
+.step-content {
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.step-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-text-dark, #222);
+    margin: 0 0 0.5rem 0;
+}
+
+.step-desc {
+    font-size: 0.95rem;
+    color: var(--clr-text-dark, #666);
+    line-height: 1.4;
+}
+
+/* Responsive / Mobile Styles */
+@media (max-width: 1024px) {
+    .flow-stepper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+        padding-left: 2rem;
+        /* Make space for vertical line */
+    }
+
+    /* Vertical Line */
+    .stepper-line {
+        width: 3px;
+        height: 100%;
+        /* Full height */
+        top: 0;
+        left: 20px;
+        /* Align with left padding */
+        transform: none;
+    }
+
+    .flow-step {
+        flex-direction: row;
+        width: 100%;
+        text-align: left;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .step-marker {
+        margin-bottom: 0;
+    }
+
+    .step-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        /* Ensure styling matches */
+    }
+
+    .step-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Show connecting dots contextually if needed, but the line behind the icons works well */
+
+    .step-content {
+        text-align: left;
+        padding-top: 0.5rem;
+    }
+
+    .step-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flow-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .flow-title {
+        font-size: 1.8rem;
+    }
+
+    .flow-stepper {
+        padding-left: 1rem;
+    }
+
+    .stepper-line {
+        left: 36px;
+        /* Align deeply with the icon center */
+    }
+
+    .step-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .stepper-line {
+        left: 40px;
+        /* Center of 60px + padding? No, wrapper is relative. 
+                     Wait, flex row means marker is first child. 
+                     Marker width = 60px. Center = 30px.
+                     So left should be 1rem (padding-left of parent not included in absolute calc?) + 30px.
+                     
+                     Actually, simpler approach for mobile vertical line:
+                     Put the border on the container or use a pseudo-element on the list container.
+                     But the current absolute .stepper-line is relative to .flow-stepper.
+                     If .flow-stepper has padding-left: 1rem.
+                     Then line 'left' needs to center on the start of the icon.
+                     Let's check the devtools or just guess: 1rem + 30px = approx 46px.
+                  */
+        left: 40px;
+    }
+
+    .flow-step {
+        gap: 1rem;
+    }
+}
