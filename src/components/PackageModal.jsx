@@ -11,7 +11,7 @@ const PACKAGE_LIST = [
         id: 0,
         title: "1 BHK Standard Package (Upto 500 Sq.Ft)",
         description: "Smart, space-saving preset themes curated for compact living.",
-        price: "₹4,24,999/-",
+        price: "₹4,49,999/-",
         tableHeaders: ["Inclusion(s)", "Specification"],
         tableRows: [
             { "Inclusion(s)": "TV Unit", Specification: "Size - 8.5' x 6' - Merino Laminate, Century Ply" },
