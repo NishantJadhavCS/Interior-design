@@ -3,16 +3,19 @@ import "./css/Projects.css";
 import { FaArrowLeft, FaArrowRight, FaTimes, FaStar } from "react-icons/fa";
 
 // Dynamic image loading
-const site1Images = import.meta.glob("../assets/site1/*.jpg", { eager: true, as: "url" });
-const site2Images = import.meta.glob("../assets/site2/*.jpg", { eager: true, as: "url" });
+const site1Images = import.meta.glob("../assets/site1/*.{jpg,jpeg}", { eager: true, query: "?url", import: "default" });
+const site2Images = import.meta.glob("../assets/site2/*.{jpg,jpeg}", { eager: true, query: "?url", import: "default" });
+const site3Images = import.meta.glob("../assets/site3/*.{jpg,jpeg}", { eager: true, query: "?url", import: "default" });
 
 // Helper to sort images numerically (site1-1.jpg, site1-2.jpg, ... site1-10.jpg)
 const sortImages = (imagesObj) => {
   return Object.keys(imagesObj)
     .sort((a, b) => {
-      // Extract number from filename (e.g. site1-1.jpg -> 1)
-      const numA = parseInt(a.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
-      const numB = parseInt(b.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
+      // Extract number from filename (e.g. site1-1.jpg or site3-10.jpeg)
+      const matchA = a.match(/site\d+-(\d+)\.(jpg|jpeg)$/);
+      const matchB = b.match(/site\d+-(\d+)\.(jpg|jpeg)$/);
+      const numA = parseInt(matchA?.[1] || "0", 10);
+      const numB = parseInt(matchB?.[1] || "0", 10);
       return numA - numB;
     })
     .map((key) => imagesObj[key]);
@@ -21,6 +24,7 @@ const sortImages = (imagesObj) => {
 // Processed image arrays
 const project1Images = sortImages(site1Images);
 const project2Images = sortImages(site2Images);
+const project3Images = sortImages(site3Images);
 
 const projectsData = [
   {
@@ -38,6 +42,14 @@ const projectsData = [
     description: "A luxury duplex featuring refined materials, elegant detailing, and well-planned spaces for a sophisticated living experience.",
     coverImage: project2Images[0], // First image as cover
     images: project2Images,
+  },
+  {
+    id: 3,
+    title: "2BHK Interior @ VKG Chakala, Andheri East",
+    category: "Residential",
+    description: "A contemporary 2BHK designed with functional layouts, modern aesthetics, and a warm color palette for a welcoming urban home.",
+    coverImage: project3Images[0], // First image as cover
+    images: project3Images,
   },
 ];
 

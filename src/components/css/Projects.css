@@ -9,7 +9,7 @@
 }
 
 .projects-container {
-  max-width: 1300px;
+  max-width: 1800px;
   margin: 0 auto;
 }
 
@@ -37,13 +37,13 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
-  /* Responsive min-width for larger cards */
-  max-width: 1300px;
-  /* Constrain width to keep cards from getting too wide but center them */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
+  /* Increased min-width for larger cards */
+  max-width: 1500px;
+  /* Increased max-width */
   margin: 0 auto;
-  gap: 3rem;
-  /* Increased gap */
+  gap: 2.5rem;
+  /* Adjusted gap */
   justify-content: center;
 }
 
