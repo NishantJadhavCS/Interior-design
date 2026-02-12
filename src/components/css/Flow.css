@@ -75,6 +75,7 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 1.5rem;
+    padding: 10px 10px;
 }
 
 .step-icon-wrapper {
@@ -154,13 +155,7 @@
 
     /* Vertical Line */
     .stepper-line {
-        width: 3px;
-        height: 100%;
-        /* Full height */
-        top: 0;
-        left: 20px;
-        /* Align with left padding */
-        transform: none;
+        display: none;
     }
 
     .flow-step {
@@ -169,6 +164,7 @@
         text-align: left;
         align-items: flex-start;
         gap: 1.5rem;
+        align-items: center;
     }
 
     .step-marker {

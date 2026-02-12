@@ -63,12 +63,12 @@ export default function Navbar() {
                     </button>
 
                     {/* LOGO (center on mobile, normal on desktop) */}
-                    <a href="/" className="brand">
-                        <img src={logo} alt="Contrive Designs" className="brand-logo" />
+                    <a href="/" className="brand" title="Contrive Designs - Interior Designers in Mumbai">
+                        <img src={logo} alt="Contrive Designs interior design company logo" className="brand-logo" />
                     </a>
 
                     {/* DESKTOP NAV */}
-                    <nav className="header-center desktop-only">
+                    <nav className="header-center desktop-only" aria-label="Main navigation">
                         <ul className="nav-links">
                             <li><a href="#home">Home</a></li>
                             <li><a href="#packages">Packages</a></li>
@@ -79,7 +79,14 @@ export default function Navbar() {
 
                     {/* RIGHT: Desktop Contact Button */}
                     <div className="header-right desktop-only">
-                        <a className="btn-contact" href={whatsappLink} target="_blank" rel="noopener noreferrer">Contact Us</a>
+                        <a
+                            className="btn-contact"
+                            href={whatsappLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Contact Contrive Designs on WhatsApp"
+                        >
+                            Contact Us</a>
                     </div>
                 </div>
             </header>
@@ -92,7 +99,7 @@ export default function Navbar() {
                 <ul className="drawer-links">
                     <li><a href="#home" onClick={() => setOpen(false)}>Home</a></li>
                     <li><a href="#packages" onClick={() => setOpen(false)}>Packages</a></li>
-                    {/* <li><a href="#projects" onClick={() => setOpen(false)}>Projects</a></li> */}
+                    <li><a href="#projects" onClick={() => setOpen(false)}>Projects</a></li>
                     <li><a href="#testimonials" onClick={() => setOpen(false)}>Testimonials</a></li>
                 </ul>
 

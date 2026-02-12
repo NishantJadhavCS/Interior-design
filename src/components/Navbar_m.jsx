@@ -6,7 +6,7 @@ export default function Navbar_m() {
         <header className="maintenance-header">
             <div className="maintenance-inner">
                 <a href="/" className="maintenance-brand">
-                    <img src={logo} alt="Contrive Designs" className="maintenance-logo" />
+                    <img src={logo} alt="Contrive Designs interior design company logo" className="maintenance-logo" />
                 </a>
             </div>
         </header>

@@ -11,24 +11,28 @@ export default function Highlights() {
         {
             id: "delivery",
             icon: ClockGif,
+            iconAlt: "Fast 40-day home interior design delivery timeline",
             title: "40-Day Delivery Guarantee",
             desc: "On-time delivery or your money back. Your project moves fast, without compromise."
         },
         {
             id: "budget-overview",
             icon: PackageGif,
+            iconAlt: "Transparent interior design packages for 1 BHK and 2 BHK homes",
             title: "Honest Packages",
             desc: "Clear package scopes with no hidden conditions, pick what fits and know exactly what’s included.",
         },
         {
             id: "curated",
             icon: PalleteGif,
+            iconAlt: "Branded materials and fittings for modular home interiors",
             title: "Branded Fittings",
             desc: "Premium fittings and materials for a refined, long-lasting finish."
         },
         {
             id: "budget-friendly",
             icon: RupeeGif,
+            iconAlt: "Budget-friendly interior design solutions for residential homes",
             title: "Budget Friendly",
             desc: "Standard and customize packages with budget-friendly deals",
 
@@ -78,7 +82,7 @@ export default function Highlights() {
                             data-aos-offset={isMobile ? 60 : 80 + index * 20}
                         >
                             <div className="icon-wrap">
-                                <img src={it.icon} alt="" className="hi-gif" />
+                                <img src={it.icon} alt={it.iconAlt} className="hi-gif" />
                             </div>
 
                             <div className="card-text">

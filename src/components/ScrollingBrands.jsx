@@ -12,16 +12,16 @@ import Greenply from "../assets/brands/greenply.png";
 import Nerolac from "../assets/brands/nerolac.png";
 
 const brands = [
-    { src: BirlaWhite, alt: "Birla White", w: 180, h: 100 },
-    { src: Berger, alt: "Berger", w: 120, h: 100 },
-    { src: CenturyPly, alt: "Century Ply", w: 150, h: 100 },
-    { src: Hettich, alt: "Hettich", w: 130, h: 100 },
-    { src: AsianPaints, alt: "Asian Paints", w: 150, h: 100 },
-    { src: Polycab, alt: "Polycab", w: 135, h: 100 },
-    { src: Jaguar, alt: "Jaguar", w: 135, h: 100 },
-    { src: Kohler, alt: "Kohler", w: 135, h: 100 },
-    { src: Greenply, alt: "Greenply", w: 140, h: 160 },
-    { src: Nerolac, alt: "Nerolac", w: 140, h: 160 },
+    { src: BirlaWhite, alt: "Birla White brand used in premium home interior materials", w: 180, h: 100 },
+    { src: Berger, alt: "Berger paints brand for home interior finishing", w: 120, h: 100 },
+    { src: CenturyPly, alt: "Century Ply brand for modular home interior woodwork", w: 150, h: 100 },
+    { src: Hettich, alt: "Hettich fittings brand for modular kitchen and wardrobe interiors", w: 130, h: 100 },
+    { src: AsianPaints, alt: "Asian Paints brand for residential interior wall finishes", w: 150, h: 100 },
+    { src: Polycab, alt: "Polycab electrical brand used in home interior projects", w: 135, h: 100 },
+    { src: Jaguar, alt: "Jaquar fittings brand for bathroom interior solutions", w: 135, h: 100 },
+    { src: Kohler, alt: "Kohler sanitary and bath brand for luxury home interiors", w: 135, h: 100 },
+    { src: Greenply, alt: "Greenply plywood brand for custom furniture and interiors", w: 140, h: 160 },
+    { src: Nerolac, alt: "Nerolac paints brand used in modern home interior design", w: 140, h: 160 },
 ];
 
 

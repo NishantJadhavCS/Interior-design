@@ -175,7 +175,7 @@ const Projects = () => {
             >
               <img
                 src={project.coverImage}
-                alt={project.title}
+                alt={`${project.title} residential interior design project by Contrive Designs`}
                 className="project-image"
               />
 
@@ -234,7 +234,7 @@ const Projects = () => {
             <img
               key={currentImageIndex}
               src={activeProject.images[currentImageIndex]}
-              alt={`${activeProject.title} - ${currentImageIndex + 1}`}
+              alt={`${activeProject.title} interior design photo ${currentImageIndex + 1}`}
               className="gallery-main-image"
             />
 

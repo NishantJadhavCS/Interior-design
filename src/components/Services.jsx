@@ -17,6 +17,12 @@ export default function Services() {
     const [modalPackageId, setModalPackageId] = useState(null);
 
     useEffect(() => {
+        const openConsultationModal = () => setEstimatorOpen(true);
+        window.addEventListener("open-consultation-modal", openConsultationModal);
+        return () => window.removeEventListener("open-consultation-modal", openConsultationModal);
+    }, []);
+
+    useEffect(() => {
         const mobileBreakpoint = 980;
 
         let rafId = null;
@@ -146,7 +152,7 @@ export default function Services() {
                             <div
                                 className="card-media"
                                 role="img"
-                                aria-label="1 BHK sample image"
+                                aria-label="1 BHK home interior design package with modular kitchen and storage"
                                 style={{ backgroundImage: `url(${img1})` }}
                             />
                             <div className="card-body">
@@ -194,7 +200,7 @@ export default function Services() {
                             <div
                                 className="card-media"
                                 role="img"
-                                aria-label="2 BHK sample image"
+                                aria-label="2 BHK home interior design package with modern living room styling"
                                 style={{ backgroundImage: `url(${img2})` }}
                             />
                             <div className="card-body">
@@ -247,7 +253,7 @@ export default function Services() {
                             <div
                                 className="card-media"
                                 role="img"
-                                aria-label="Build in your budget sample image"
+                                aria-label="Affordable interior design options based on your home budget"
                                 style={{ backgroundImage: `url(${img3})` }}
                             />
                             <div className="card-body">

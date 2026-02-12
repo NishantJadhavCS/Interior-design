@@ -72,7 +72,7 @@ export default function Flow() {
                                 <div className="step-icon-wrapper">
                                     <img
                                         src={step.icon}
-                                        alt={step.title}
+                                        alt={`${step.title} step in the home interior design process`}
                                         className="step-icon"
                                     />
                                 </div>

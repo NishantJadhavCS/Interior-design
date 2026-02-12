@@ -15,7 +15,8 @@ export default function Hero() {
             image: hero2,
             title: "Custom Interior Solutions for Every Budget.",
             buttonText: "Get Free Consultation",
-            buttonLink: "#contact",
+            buttonLink: "#packages",
+            action: "openConsultationModal",
         },
     ];
 
@@ -134,6 +135,12 @@ export default function Hero() {
     const onPointerCancel = (e) => finishPointer(e);
     const onLostPointerCapture = (e) => finishPointer(e);
 
+    const onHeroButtonClick = (e, slide) => {
+        if (slide.action !== "openConsultationModal") return;
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("open-consultation-modal"));
+    };
+
     const renderSlides = () => {
         const width = containerWidth() || 1;
         const dragPercent = (dragOffset / width) * 100;
@@ -159,7 +166,11 @@ export default function Hero() {
                     <div className="hero-overlay" />
                     <div className="hero-content">
                         <h1 className="hero-title">{slide.title}</h1>
-                        <a href={slide.buttonLink} className="hero-btn">
+                        <a
+                            href={slide.buttonLink}
+                            className="hero-btn"
+                            onClick={(e) => onHeroButtonClick(e, slide)}
+                        >
                             {slide.buttonText}
                         </a>
                     </div>

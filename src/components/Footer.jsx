@@ -19,7 +19,7 @@ export default function Footer() {
                     <div className="brand-footer">
                         <img
                             src={logo}
-                            alt="Contrive Designs"
+                            alt="Contrive Designs logo for home interior design services"
                             className="brand-logo-footer"
                         />
                         <p className="brand-tagline">
@@ -33,6 +33,7 @@ export default function Footer() {
                             className="social"
                             aria-label="Instagram"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i className="fab fa-instagram" aria-hidden="true"></i>
                         </a>
@@ -42,6 +43,7 @@ export default function Footer() {
                             className="social"
                             aria-label="Facebook"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i className="fab fa-facebook-f" aria-hidden="true"></i>
                         </a>
@@ -51,6 +53,7 @@ export default function Footer() {
                             className="social"
                             aria-label="WhatsApp"
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <i className="fab fa-whatsapp" aria-hidden="true"></i>
                         </a>
